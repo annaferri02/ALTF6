@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController /* Annotation per definire che la classe risponderà tramite rest  */
-@RequestMapping("/ciao") /* Annotation per definire il path della classe  */
+@RequestMapping("/api") /* Annotation per definire il path della classe  */
 public class MainController {
     @Autowired
     MyService myService;
@@ -28,6 +28,6 @@ public class MainController {
 
     @RequestMapping("/callREST") /* Annotation per definire il path del metodo (relativo alla classe)  */
     public String callRest() {
-        return TemplateRestConsumer.callREST("helloMock", null, true);
+        return TemplateRestConsumer.callREST("bello", null, true);
     }
 }
