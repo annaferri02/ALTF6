@@ -6,7 +6,7 @@ import { ref } from 'vue';
 const data = ref(0);
 
 /* Inseriamo nella variabile data il risultato della chiamata al backend */
-axios.get("/api/callREST").then(response => {
+axios.get("/api/bello").then(response => {
 console.log(JSON.stringify(response.data))
 data.value = response.data
 })
@@ -35,11 +35,5 @@ class MyValues{
   </div>
 </template>
 
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
-</style>
+<style src = "/Users/annaferri/Desktop/ALTF6/IngSw2024FET/src/assets/base.css"></style>
+<style src = "/Users/annaferri/Desktop/ALTF6/IngSw2024FET/src/assets/main.css"></style>

@@ -1,35 +1,42 @@
 @import './base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+.logo {
+  width: 20%;
+}
+.right-section {
+  width: 70%;
+  display: flex;
+  justify-content: right;
+}
+.login, .register{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.riepilogo, .form-pagamento {
+  flex: 1;
+  width: 400px;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.button {
+  background-color: #ffffff;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 10px;
+  height: fit-content;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.buttonM {
+  background-color: #ffffff;
+  border-color: black;
+  border-width: 1px;
+  height: 40px
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.button:hover {
+  background-color: lightsteelblue;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.buttonM:hover {
+  background-color: lightblue;
 }
