@@ -1,7 +1,7 @@
 package it.unife.ingsw202324.MicroservizioBase.api;
 
-import it.unife.ingsw202324.MicroservizioBase.models.MyValues;
-import it.unife.ingsw202324.MicroservizioBase.services.MyService;
+import it.unife.ingsw202324.MicroservizioBase.models.Biglietto;
+import it.unife.ingsw202324.MicroservizioBase.services.ServiceTicket;
 import it.unife.ingsw202324.MicroservizioBase.services.TemplateRestConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,25 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController /* Annotation per definire che la classe risponderà tramite rest  */
-@RequestMapping("/api") /* Annotation per definire il path della classe  */
-public class MainController {
+@RequestMapping("/ticket") /* Annotation per definire il path della classe  */
+public class TicketController {
     @Autowired
-    MyService myService;
+    ServiceTicket ticketService;
     @RequestMapping("/costobiglietti") /* Annotation per definire il path del metodo (relativo alla classe)  */
-    public List<MyValues> testMysql() {
-        return myService.getAll();
+    public List<Biglietto> testMysql() {
+        return ticketService.getAll();
     }
 
     @RequestMapping("/testWithElements") /* Annotation per definire il path del metodo (relativo alla classe)  */
-    public List<MyValues> addElements() {
-
-        /* Chiamata a un servizio che ritorna inserisce 3 dati e ritorna il db */
-        return myService.addElements();
+    public String addElement() {
+        /* Chiamata a un servizio che ritorna inserisce dati e ritorna il db */
+        return ticketService.addElement(this.callRest()).toString();
     }
 
     @RequestMapping("/callREST") /* Annotation per definire il path del metodo (relativo alla classe)  */
-    public String callRest() {
-        return TemplateRestConsumer.callREST("new", null, true);
+    public Biglietto callRest() {
+        return TemplateRestConsumer.callREST2("new", null, true);
     }
 
 

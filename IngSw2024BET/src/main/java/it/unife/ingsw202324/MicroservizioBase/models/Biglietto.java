@@ -22,4 +22,11 @@ public class Biglietto {
     private String ID_Biglietto;
     private Long prezzo;
     private String ID_utente;
+    private String ID_evento;
+    private String PDF_biglietto;
+    private String QRcode;
+
+    public void setDescrizione(String record) {
+
+    }
 }
