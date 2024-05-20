@@ -30,36 +30,13 @@ const saveData = async () => {
   }
 };
 
-class riepilogoOrdine{
-  "nome_concerto": string;
-  "tipo_biglietto_1": string;
-  "tipo_biglietto_2": string;
-  "quantita_1": string;
-  "quantita_2": string;
-  "totale": string;
-}
-//devo trasformare la classe riepilogoOrdine in un oggetto
-let riepilogo = new riepilogoOrdine();
-riepilogo.nome_concerto = "Nome del concerto";
-riepilogo.tipo_biglietto_1 = "Tipo del biglietto 1";
-riepilogo.tipo_biglietto_2 = "Tipo del biglietto 2";
-riepilogo.quantita_1 = "Quantità 1";
-riepilogo.quantita_2 = "Quantità 2";
-riepilogo.totale = "Totale";
+const riepilogoList = ref(0);
 
 /* Inseriamo nella variabile data il risultato della chiamata al backend */
-axios.get("http://localhost:3000/api/bello").then(response => {
-  console.log(JSON.stringify(response.data))
-  riepilogo.nome_concerto = response.data.nome_concerto
-  riepilogo.quantita_1 = response.data.quantita_1
-  riepilogo.quantita_2 = response.data.quantita_2
-  riepilogo.tipo_biglietto_1 = response.data.tipo_biglietto_1
-  riepilogo.tipo_biglietto_2 = response.data.tipo_biglietto_2
-  riepilogo.totale = response.data.totale
-})
-    .catch(error => {
-      console.error('Errore durante la richiesta:', error);
-    });
+axios.get("/api/callREST").then(response => {
+  console.log(JSON.stringify(response.data));
+  riepilogoList.value = response.data;
+});
 
 </script>
 
@@ -87,10 +64,12 @@ axios.get("http://localhost:3000/api/bello").then(response => {
       <div class="riepilogo">
         <h1>Riepilogo ordine</h1>
         <!--Inserire i dati del riepilogo ordine ricevuti dal backend-->
-        <h2>Nome concerto: {{ riepilogo.nome_concerto }}</h2>
-        <p>Tipo biglietto 1: {{ riepilogo.tipo_biglietto_1 }}, quantità: {{ riepilogo.quantita_1 }}</p>
-        <p>Tipo biglietto 2: {{ riepilogo.tipo_biglietto_2 }}, quantità: {{ riepilogo.quantita_2 }}</p>
-        <h2>Totale: {{ riepilogo.totale }}</h2>
+        <template v-for="item in riepilogoList">
+          <h2>Nome Concerto: {{ item.nome_concerto}}</h2>
+          <p>Tipo biglietto 1: {{ item.tipo_biglietto_1}}, quantità: {{ item.quantita_1 }}</p>
+          <p>Tipo biglietto 2: {{ item.tipo_biglietto_2 }}, quantità: {{ item.quantita_2 }}</p>
+          <h2>Totale: {{ item.totale }}</h2>
+        </template>>
         <a href="scelta_biglietti.html">Modifica ordine</a>
       </div>
       <div class="form_pagamento">
