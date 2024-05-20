@@ -13,11 +13,19 @@
   justify-content: center;
   align-items: center;
 }
-.riepilogo, .form-pagamento {
+.riepilogo, .form-pagamento, .biglietto .biglietto_dettagli, .riepilogo_dettagli{
   flex: 1;
   width: 400px;
 }
-
+.immagine_concerto{
+  background-image: url(immagine_concerto.jpeg);
+  width: 500px;
+  height: 500px;
+}
+.dati_concerto{
+  background-color: #ffffff;
+  opacity: 0.7;
+}
 .button {
   background-color: #ffffff;
   border-color: black;

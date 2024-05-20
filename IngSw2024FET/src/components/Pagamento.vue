@@ -33,7 +33,7 @@ const saveData = async () => {
 const riepilogoList = ref(0);
 
 /* Inseriamo nella variabile data il risultato della chiamata al backend */
-axios.get("/api/callREST").then(response => {
+axios.get("/api/callREST2").then(response => {
   console.log(JSON.stringify(response.data));
   riepilogoList.value = response.data;
 });
@@ -69,7 +69,7 @@ axios.get("/api/callREST").then(response => {
           <p>Tipo biglietto 1: {{ item.tipo_biglietto_1}}, quantità: {{ item.quantita_1 }}</p>
           <p>Tipo biglietto 2: {{ item.tipo_biglietto_2 }}, quantità: {{ item.quantita_2 }}</p>
           <h2>Totale: {{ item.totale }}</h2>
-        </template>>
+        </template>
         <a href="scelta_biglietti.html">Modifica ordine</a>
       </div>
       <div class="form_pagamento">
@@ -90,7 +90,7 @@ axios.get("/api/callREST").then(response => {
           <input :value="scadenza" placeholder=" "><br>
           <label for="cvv">CVV</label><br>
           <input :value="cvv" placeholder=" "><br><br>
-          <input type="submit" value="Paga ora" class="button">
+          <input type="submit" value="PAGA ORA" class="button">
         </form>
       </div>
     </main>

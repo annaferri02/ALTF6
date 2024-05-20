@@ -28,9 +28,13 @@ public class MainController {
 
     @RequestMapping("/callREST") /* Annotation per definire il path del metodo (relativo alla classe)  */
     public String callRest() {
-        return TemplateRestConsumer.callREST("new", null, true);
+        return TemplateRestConsumer.callREST("biglietto", null, true);
     }
 
+    @RequestMapping("/callREST2") /* Annotation per definire il path del metodo (relativo alla classe)  */
+    public String callRest2() {
+        return TemplateRestConsumer.callREST("bello", null, true);
+    }
 
 
 }
