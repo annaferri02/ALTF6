@@ -22,6 +22,4 @@ public class Biglietto {
     private String ID_Biglietto;
     private Long prezzo;
     private String ID_utente;
-    private Blob PDF_biglietto;
-    private Blob QRCODE;
 }
