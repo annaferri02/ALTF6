@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import axios from 'axios';
 import { ref } from 'vue';
+import Pagamento from "@/components/Pagamento.vue";
 
 /* Inseriamo in una variabile reattiva chiamata data */
 const informazioni_biglietti = ref(0);
@@ -13,6 +14,7 @@ axios.get("/api/callREST").then(response => {
 
 
 class Biglietto {
+  "nome_concerto": string; //aggiunto
   "dataa": string;
   "ora": string;
   "luogo": string;
@@ -51,7 +53,7 @@ class Biglietto {
   </header>
   <main>
     <div class="riepilogo">
-      <h1>Nome concerto</h1>
+      <h1>{{ informazioni_biglietti.nome_concerto }} <span style="float: right; padding-right: 20px;"> </span></h1>
       <h2>Biglietti disponibili</h2>
       <div class="selezioe_biglietti">
         <p>{{ informazioni_biglietti.tipo_biglietto_1 }} <span style="float: right; padding-right: 20px;"> {{ informazioni_biglietti.prezzo_tipo1}}</span></p>
@@ -63,11 +65,12 @@ class Biglietto {
       <h2>Riepilogo</h2>
       <p>{{informazioni_biglietti.quantita_1}} {{informazioni_biglietti.tipo_biglietto_1}} <span style="float: right; padding-right: 20px;"> {{informazioni_biglietti.prezzo_tipo1}}</span></p>
       <p>{{informazioni_biglietti.quantita_2}} {{informazioni_biglietti.tipo_biglietto_2}} <span style="float: right; padding-right: 20px;"> {{informazioni_biglietti.prezzo_tipo2}}</span></p>
-      <button action="">VAI AL PAGAMENTO</button>
+      <!-- quando spingo il bottone mi deve portare alla pagina di pagamento -->
+      <button @click="Pagamento.vue">VAI AL PAGAMENTO</button>
     </div>
     <div class="immagine_concerto">
       <div class="dati_concerto">
-        <h1>{{ informazioni_biglietti.dataa }} <br> {{ informazioni_biglietti.ora }} <br> {{ informazioni_biglietti.luogo }}</h1>
+        <h1>{{ informazioni_biglietti.dataa }} ore {{ informazioni_biglietti.ora }} <br> {{ informazioni_biglietti.luogo }}</h1>
       </div>
     </div>
   </main>

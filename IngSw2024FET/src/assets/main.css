@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
 }
-.riepilogo, .form-pagamento, .biglietto .biglietto_dettagli, .riepilogo_dettagli{
+.riepilogo, .form-pagamento, .biglietto .biglietto_dettagli, .riepilogo_dettagli, .promotion-section, .benefits{
   flex: 1;
   width: 400px;
 }
@@ -47,4 +47,28 @@
 
 .buttonM:hover {
   background-color: lightblue;
+}
+
+.container img{
+  width: 100%;
+  height: auto;
+  pointer-events: none; /* Disabilita l'interazione dell'utente con il video */
+  display: block; /* Assicura che il video si comporti come un blocco */
+}
+
+.payment-methods{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.payment-methods img {
+  border-radius: 10px;
+  width: 100px;
+  height: 60px;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
