@@ -1,8 +1,10 @@
 @import './base.css';
+@import './biglietti.css';
 
 .logo {
   width: 20%;
 }
+
 .right-section {
   width: 70%;
   display: flex;
@@ -54,17 +56,6 @@
   height: auto;
   pointer-events: none; /* Disabilita l'interazione dell'utente con il video */
   display: block; /* Assicura che il video si comporti come un blocco */
-}
-
-.payment-methods{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.payment-methods img {
-  border-radius: 10px;
-  width: 100px;
-  height: 60px;
 }
 
 .center-button {
