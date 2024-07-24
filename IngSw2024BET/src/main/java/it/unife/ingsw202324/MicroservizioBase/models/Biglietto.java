@@ -24,6 +24,7 @@ public class Biglietto {
     private String PDF_biglietto;
     private String QRcode;
     private Integer Posto;
+    private String Tipologia;
 
 
     public String getID_Biglietto() {
@@ -80,5 +81,13 @@ public class Biglietto {
 
     public void setPosto(Integer Posto) {
         this.Posto = Posto;
+    }
+
+    public String getTipologia() {
+        return Tipologia;
+    }
+
+    public void setTipologia(String Tipologia) {
+        this.Tipologia = Tipologia;
     }
 }
