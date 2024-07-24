@@ -38,6 +38,7 @@ public class ServiceTicket {
         return TemplateRestConsumer.callREST("new", null, true);
     }
 
-
-
+    public List<String> getPostiByIdEvento(String idEvento) {
+        return myRepository.findPostiByIdEvento(idEvento);
+    }
 }

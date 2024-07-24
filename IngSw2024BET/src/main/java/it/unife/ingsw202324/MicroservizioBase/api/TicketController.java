@@ -1,6 +1,8 @@
 package it.unife.ingsw202324.MicroservizioBase.api;
 
 import it.unife.ingsw202324.MicroservizioBase.models.Biglietto;
+import it.unife.ingsw202324.MicroservizioBase.models.Evento;
+import it.unife.ingsw202324.MicroservizioBase.models.Luogo;
 import it.unife.ingsw202324.MicroservizioBase.services.ServiceTicket;
 import it.unife.ingsw202324.MicroservizioBase.services.TemplateRestConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,55 @@ public class TicketController {
         return ticketService.addElement(this.callRest()).toString();
     }
 
+
+    @RequestMapping("/getInfoBiglietti")
+    public TicketData getInfoBiglietti() {
+
+        TicketData ticketData = new TicketData();
+
+        ticketData.setEvento(TemplateRestConsumer.getEventoMock("evento", null, true));
+        ticketData.setLuogo(TemplateRestConsumer.getLuogoMock("luogo", null, true));
+        ticketData.setBiglietti(ticketService.getPostiByIdEvento(ticketData.getEvento().getID_Evento()));
+
+        return ticketData;
+    }
+
     @RequestMapping("/callREST") /* Annotation per definire il path del metodo (relativo alla classe)  */
     public Biglietto callRest() {
         return TemplateRestConsumer.callREST2("new", null, true);
     }
 
+}
 
+
+class TicketData {
+    private List<String> biglietti;
+    private Evento evento;
+
+    private Luogo luogo;
+
+    public List<String> getBiglietti() {
+        return biglietti;
+    }
+
+    public void setBiglietti(List<String > biglietti) {
+        this.biglietti = biglietti;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
+    public Luogo getLuogo() {
+        return luogo;
+    }
+
+    public void setLuogo(Luogo luogo) {
+        this.luogo = luogo;
+    }
 
 }
