@@ -6,6 +6,7 @@ import it.unife.ingsw202324.MicroservizioBase.models.Luogo;
 import it.unife.ingsw202324.MicroservizioBase.services.ServiceTicket;
 import it.unife.ingsw202324.MicroservizioBase.services.TemplateRestConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

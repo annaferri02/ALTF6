@@ -92,10 +92,11 @@ public class TemplateRestConsumer {
         Evento evento = new Evento();
         evento.setID_Evento("E0001");
         evento.setNome("Concerto Live");
-        evento.setData(20241231L);
+        //evento.setData(20241231L);
         evento.setDescrizione("Concerto live di artisti famosi");
         evento.setID_Organizzatore("O0001");
         evento.setFlag_ticket(true);
+        evento.setIdLuogo("L00001");
         return evento;
     }
 
@@ -131,7 +132,7 @@ public class TemplateRestConsumer {
         luogo.setProvincia("RM");
         luogo.setStato("Italia");
         luogo.setCitta("Roma");
-        luogo.setCapienza(500);
+        //luogo.setCapienza(500);
         luogo.setTipologia("Indoor");
         return luogo;
     }
