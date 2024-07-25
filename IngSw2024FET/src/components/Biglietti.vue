@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
 
+/*
 const biglietti = ref([]);
 const evento = ref({
   id_Evento: '',
@@ -25,10 +24,13 @@ const luogo = ref({
   nome: ''
 });
 
+const infos = ref([]);
+
 onMounted(() => {
   axios.get("/ticket/getInfoBiglietti")
       .then(response => {
-        console.log("Dati ricevuti:", response.data); // Verifica i dati ricevuti
+
+        /*console.log("Dati ricevuti:", response.data); // Verifica i dati ricevuti
         const data = response.data;
 
         if (Array.isArray(data.biglietti) && data.evento && data.luogo) {
@@ -57,6 +59,8 @@ onMounted(() => {
         } else {
           console.error("Errore: la struttura dei dati ricevuti è inaspettata.");
         }
+
+        infos.value = response.data;
       })
       .catch(error => {
         console.error("Errore durante il recupero dei dati:", error);
@@ -64,7 +68,58 @@ onMounted(() => {
 });
 
 
+export default {
+  data() {
+    return {
+      biglietti: [],
+      evento: {},
+      luogo: {}
+    };
+  },
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      // Supponiamo che l'endpoint API restituisca il JSON fornito nella domanda
+      axios.get("/ticket/getInfoBiglietti")
+          .then(response => {
+            // Salva i dati nelle variabili del componente
+            this.biglietti = response.data.biglietti;
+            this.evento = response.data.evento;
+            this.luogo = response.data.luogo;
+          })
+          .catch(error => {
+            console.error("C'è stato un errore nel recuperare i dati:", error);
+          });
+    }
+  }
+};*/
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+// Definisci le variabili reattive
+const biglietti = ref([]);
+const evento = ref({});
+const luogo = ref({});
+
+// Funzione per recuperare i dati
+const fetchData = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/ticket/getInfoBiglietti');
+    console.log('Response data:', response.data);
+    biglietti.value = response.data.biglietti;
+    evento.value = response.data.evento;
+    luogo.value = response.data.luogo;
+    console.log('Dati aggiornati:', { biglietti: biglietti.value, evento: evento.value, luogo: luogo.value });
+  } catch (error) {
+    console.error("C'è stato un errore nel recuperare i dati:", error);
+  }
+};
+
+// Recupera i dati quando il componente viene montato
+onMounted(fetchData);
 </script>
+
 
 
 <template>
@@ -74,7 +129,7 @@ onMounted(() => {
   <body>
   <header>
     <div class="logo">
-      <img src="/Users/annaferri/Desktop/ALTF6/IngSw2024FET/src/assets/Logo.svg" alt="Logo" width="200" height="100">
+      <!-- <img src="/Users/annaferri/Desktop/ALTF6/IngSw2024FET/src/assets/Logo.svg" alt="Logo" width="200" height="100">-->
     </div>
     <div class="right-section">
       <div class="login">
@@ -87,7 +142,20 @@ onMounted(() => {
     </div>
   </header>
   <main>
-    <h1>{{ luogo.nome }}</h1>
+
+    <div>
+      <template v-if="Object.keys(evento).length">
+        <h1>{{ evento.nome }}</h1>
+        <p>{{ evento.descrizione }}</p>
+        <p>Data: {{ evento.data || 'Data non disponibile' }}</p>
+        <p>Luogo: {{ luogo.nome }}, {{ luogo.via }} {{ luogo.numCivico }}, {{ luogo.citta }} ({{ luogo.provincia }})</p>
+        <p>Tipologia: {{ luogo.tipologia }}</p>
+        <p>Biglietti disponibili: {{ biglietti.join(', ') }}</p>
+      </template>
+      <template v-else>
+        <p>Caricamento dati...</p>
+      </template>
+    </div>
     <!--<h1 class="centrato">Seleziona il biglietto che preferisci!</h1>
     <br><br>
     <p class="centrato" v-if="luogo.tipologia === 'Indoor'">Seleziona i posti numerati che desideri acquistare direttamente dalla piantina e i posti in parterre dal menù sottostante</p>
