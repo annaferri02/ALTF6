@@ -1,6 +1,7 @@
 @import './base.css';
-@import './biglietti.css';
+@import './promo.css';
 
+/* HEADER */
 .logo {
   width: 20%;
 }
@@ -9,14 +10,31 @@
   width: 70%;
   display: flex;
   justify-content: right;
+  align-items: center;
 }
+
 .login, .register{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.riepilogo, .form-pagamento, .biglietto .biglietto_dettagli, .riepilogo_dettagli, .promotion-section, .benefits{
-  flex: 1;
+
+.buttonM {
+  background-color: #ffffff;
+  border-color: black;
+  border-width: 1px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.buttonM:hover {
+  background-color: grey;
+}
+
+/**/
+
+.riepilogo, .form-pagamento, .biglietto .biglietto_dettagli, .riepilogo_dettagli {
+  display: flex;
   width: 400px;
 }
 .immagine_concerto{
@@ -24,42 +42,66 @@
   width: 500px;
   height: 500px;
 }
+
 .dati_concerto{
   background-color: #ffffff;
   opacity: 0.7;
 }
-.button {
-  background-color: #ffffff;
-  border-color: black;
-  border-width: 1px;
-  border-radius: 10px;
-  height: fit-content;
+
+/* PROMOZIONI */
+.promotion_section{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.buttonM {
-  background-color: #ffffff;
-  border-color: black;
-  border-width: 1px;
-  height: 40px
-}
-
-.button:hover {
-  background-color: lightsteelblue;
-}
-
-.buttonM:hover {
-  background-color: lightblue;
-}
-
-.container img{
-  width: 100%;
-  height: auto;
-  pointer-events: none; /* Disabilita l'interazione dell'utente con il video */
-  display: block; /* Assicura che il video si comporti come un blocco */
-}
-
-.center-button {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.promo_banner{
+  width: 220px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.promo_banner img{
+  width: 200px;
+  height: 100px;
+}
+
+.promo_banner:hover {
+  background-color: grey;
+  box-shadow: 5px 5px 3px black;
+}
+
+.benefits{
+    text-align: left;
+}
+
+.center-button {
+  background-color: #ffffff;
+  border-color: black;
+  border-width: 1px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.center-button:hover {
+  background-color: grey;
+}
+
+.payment-methods{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-methods img {
+  width: 10%;
+  height: 10%;
 }
