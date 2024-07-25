@@ -51,7 +51,6 @@ public class TicketController {
 class TicketData {
     private List<String> biglietti;
     private Evento evento;
-
     private Luogo luogo;
 
     public List<String> getBiglietti() {
