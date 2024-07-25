@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HelloWorld from './components/Biglietti.vue'
+import HelloWorld from './components/promo/Promo1.vue'
 </script>
 
 <template>
