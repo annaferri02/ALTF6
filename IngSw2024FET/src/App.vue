@@ -3,13 +3,7 @@ import HelloWorld from './components/Biglietti.vue'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <HelloWorld />
   </main>
 </template>
