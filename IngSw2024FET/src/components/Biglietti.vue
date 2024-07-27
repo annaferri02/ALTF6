@@ -51,6 +51,7 @@ const createSeats = (sectionId) => {
   const seats = [];
   let startId;
   let seatsPerRow;
+  const postiOccupatiNumerici = postiOccupati.value.map(id => Number(id));
 
   switch (sectionId) {
     case 'tribuna-sx':
@@ -70,12 +71,14 @@ const createSeats = (sectionId) => {
       seatsPerRow = seatsPerRowStandard; // Usa la configurazione predefinita
   }
 
-
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let j = 0; j < seatsPerRow; j++) {
       const seatId = startId++;
-      row.push({ id: seatId, occupied: postiOccupati.value.includes(seatId), selected: false });
+      row.push({
+        id: seatId,
+        occupied: postiOccupatiNumerici.includes(seatId) , // Supponiamo che biglietti contenga gli ID dei posti occupati
+        selected: postiSelezionati.value.includes(seatId)});
     }
     seats.push(row);
   }
@@ -111,6 +114,7 @@ function toggleSeatSelection(seat) {
   }
   console.log('Posto selezionato:', seat.id, 'Selezionato:', seat.selected);
   console.log('Posti Selezionati:', postiSelezionati.value);
+  console.log('Posti Occupati:', postiOccupati.value);
 }
 
 
@@ -205,6 +209,7 @@ const vaiAlPagamento = async () => {
                             'posto-disponibile': !seat.occupied && !seat.selected,
                             'button-margin': true
                           }"
+
                     :disabled="seat.occupied"
                     @click="toggleSeatSelection(seat)"
                     :aria-label="`Posto ${seat.id} ${seat.occupied ? 'occupato' : seat.selected ? 'selezionato' : 'disponibile'}`"
@@ -271,3 +276,9 @@ const vaiAlPagamento = async () => {
 </template>
 
 <style src = "../assets/main.css"></style>
+<style>
+
+.button-margin {
+  margin: 2px;
+}
+</style>

@@ -133,7 +133,7 @@ public class TemplateRestConsumer {
         luogo.setStato("Italia");
         luogo.setCitta("Roma");
         //luogo.setCapienza(500);
-        luogo.setTipologia("Outdoor");
+        luogo.setTipologia("Indoor");
         return luogo;
     }
 
