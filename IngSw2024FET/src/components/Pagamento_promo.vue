@@ -48,7 +48,7 @@ axios.get("/api/callREST2").then(response => {
   <body>
     <header>
       <div class="logo">
-        <img src="/Users/annaferri/Desktop/ALTF6/IngSw2024FET/src/assets/Logo.svg" alt="Logo" width="200" height="100">
+        <img src="/Users/leonardorastelli/Desktop/ALTF6/IngSw2024FET/src/assets/Logo.svg" alt="Logo" width="200" height="100">
       </div>
       <div class="right-section">
         <div class="login">
@@ -100,5 +100,5 @@ axios.get("/api/callREST2").then(response => {
 </body>
 </template>
 
-<style src = "/Users/annaferri/Desktop/ALTF6/IngSw2024FET/src/assets/base.css"></style>
-<style src = "/Users/annaferri/Desktop/ALTF6/IngSw2024FET/src/assets/main.css"></style>
+<style src = "../assets/main.css"></style>
+<style src = "../assets/base.css"></style>

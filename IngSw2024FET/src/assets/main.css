@@ -81,7 +81,7 @@
 }
 
 .benefits{
-    text-align: left;
+  text-align: left;
 }
 
 .center-button {
@@ -90,6 +90,7 @@
   border-width: 1px;
   height: 40px;
   border-radius: 5px;
+  width: fit-content;
 }
 
 .center-button:hover {

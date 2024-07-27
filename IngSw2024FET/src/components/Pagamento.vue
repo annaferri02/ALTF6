@@ -43,7 +43,7 @@ axios.get("/api/callREST2").then(response => {
 <template>
   <head>
     <title>Pagina Pagamento</title>
-    <link rel="stylesheet" href="@/assets/main.css">
+    <link rel="stylesheet" href="../assets/main.css">
   </head>
   <body>
     <header>
