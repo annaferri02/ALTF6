@@ -43,7 +43,6 @@ axios.get("/api/callREST2").then(response => {
 <template>
   <head>
     <title>Pagina Pagamento</title>
-    <link rel="stylesheet" href="../assets/main.css">
   </head>
   <body>
     <header>
@@ -57,46 +56,62 @@ axios.get("/api/callREST2").then(response => {
         <div class="register">
           <a href="register.html">Registrazione</a>
         </div>
-        <button class="buttonM">Menù</button>
+        <button class="center-button">Menù</button>
       </div>
     </header>
-    <main>
-      <div class="riepilogo">
-        <h1>Riepilogo ordine</h1>
-        <!--Inserire i dati del riepilogo ordine ricevuti dal backend-->
-        <template v-for="item in riepilogoList">
-          <h2>Nome Concerto: {{ item.nome_concerto}}</h2>
-          <p>Tipo biglietto 1: {{ item.tipo_biglietto_1}}, quantità: {{ item.quantita_1 }}</p>
-          <p>Tipo biglietto 2: {{ item.tipo_biglietto_2 }}, quantità: {{ item.quantita_2 }}</p>
-          <h2>Totale: {{ item.totale }}</h2>
-        </template>
-        <a href="scelta_biglietti.html">Modifica ordine</a>
-      </div>
-      <div class="form_pagamento">
-        <form action="/pagamento" method="post">
-          <h1>Indirizzo di fatturazione</h1>
-          <label for="nome_cognome">Nome e Cognome</label><br>
-          <input :value="nome_cognome" ><br>
-          <label for="email">Indirizzo email</label><br>
-          <input :value="email" placeholder=" "><br>
-          <label for="indirizzo">Indirizzo di residenza</label><br>
-          <input :value="residenza" placeholder=" "><br>
-          <h1>Dati di pagamento</h1>
-          <label for="nome_cogmome_card">Nome e Cognome</label><br>
-          <input :value="nome_cognome" placeholder=" "><br>
-          <label for="numero_carta">Numero carta</label><br>
-          <input :value="numero_carta" placeholder=" "><br>
-          <label for="scadenza">Scadenza</label><br>
-          <input :value="scadenza" placeholder=" "><br>
-          <label for="cvv">CVV</label><br>
-          <input :value="cvv" placeholder=" "><br><br>
-          <input type="submit" value="PAGA ORA" class="button">
+    <main class="main">
+
+        <div class="indirizzo-fatturazione">
+          <h2>Indirizzo di fatturazione</h2>
+          <label for="nome2">Nome</label>
+          <input type="text" id="nome2" name="nome2" required>
+          <label for="cognome2">Cognome</label>
+          <input type="text" id="cognome2" name="cognome2" required>
+          <label for="indirizzo">Indirizzo</label>
+          <input type="text" id="indirizzo" name="indirizzo" required>
+          <label for="citta">Citt&agrave;</label>
+          <input type="text" id="citta" name="citta" required>
+          <label for="provincia">Provincia</label>
+          <input type="text" id="provincia" name="provincia" required>
+          <label for="cap">CAP</label>
+          <input type="text" id="cap" name="cap" required>
+          <label for="stato">Stato</label>
+          <input type="text" id="stato" name="stato" required>
+          <label for="telefono">Numero di telefono</label>
+          <input type="tel" id="telefono" name="telefono" required>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="dettagli-pagamento">
+          <h2>Dettagli Pagamento</h2>
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required>
+          <label for="cognome">Cognome</label>
+          <input type="text" id="cognome" name="cognome" required>
+          <label for="numeroCarta">Numero carta</label>
+          <input type="text" id="numeroCarta" name="numeroCarta" pattern="\d{16}" maxlength="16" required>
+          <label for="scadenza">Data di scadenza</label>
+          <input type="month" id="scadenza" name="scadenza" required>
+          <label for="cvv">CVV</label>
+          <input type="text" id="cvv" name="cvv" required maxlength="3" pattern="\d{3}" >
+        </div>
+        <form class="riepilogo-ordine">
+          <h2>Riepilogo ordine</h2>
+            <!--Inserire i dati del riepilogo ordine ricevuti dal backend-->
+          <template v-for="item in riepilogoList">
+            <h2>Nome eoncerto: {{ item.nome_evento}}</h2>
+            <p>Tipo biglietto: {{ item.tipo_biglietto}}, quantità: {{ item.quantita }}</p>
+            <h2>Totale: {{ item.totale }}</h2>
+          </template>
+          <input type="submit" value="PAGA ORA" class="centrale-button">
         </form>
-      </div>
     </main>
+
     <footer>
       <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
     </footer>
+
 </body>
 </template>
 
+<style src = "@/assets/main.css"></style>

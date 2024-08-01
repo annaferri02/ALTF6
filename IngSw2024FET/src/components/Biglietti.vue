@@ -260,7 +260,7 @@ const vaiAlPagamento = async () => {
       <div>
         <h3 style="margin-left: 12%">Seleziona il numero di posti che desideri acquistare:</h3>
         <label style="margin-left: 12%" for="numeroPosti">Numero di posti </label>
-        <button class="button" @click="decrement">{{ "-" }}</button>
+        <button style="margin-left: 12%" class="button" @click="decrement">{{ "-" }}</button>
         <button class="numero">{{ count }}</button>
         <button class="button" @click="increment">{{ "+" }}</button>
         <br><br>
@@ -275,7 +275,7 @@ const vaiAlPagamento = async () => {
   </body>
 </template>
 
-<style src = "../assets/main.css"></style>
+<style src = "@/assets/main.css"></style>
 <style>
 
 .button-margin {

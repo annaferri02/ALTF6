@@ -20,18 +20,18 @@ import Pagamento_promo from "@/components/Pagamento_promo.vue";
       <div class="register">
         <a href="register.html">Registrazione</a>
       </div>
-      <button class="buttonM">Menù</button>
+      <button class="center-button">Menù</button>
     </div>
   </header>
   <main>
     <article>
       <h2>Vuoi che il tuo evento non passi inosservato?</h2>
-      <p>Sfrutta la nostra promozione 'Rimetti in Rilievo' e assicurati che il tuo evento sia la prima cosa che gli utenti vedono quando consultano il feed degli eventi.Come funziona:</p>
+      <p>Sfrutta la nostra promozione 'Rimetti in Rilievo' e assicurati che il tuo evento sia la prima cosa che gli utenti vedono quando consultano il feed degli eventi. Come funziona:</p>
       <ul>
         <li><strong>Posizionamento premium</strong>: Il tuo evento verrà posizionato in cima al feed, garantendo la massima visibilità.</li>
         <li><strong>Tariffa giornaliera competitiva</strong>: Pagherai una piccola quota al giorno per godere di questo vantaggio.</li>
-        <li><strong>Risultati misurabili</strong>: Monitora da vicino l'impatto della promozione grazie ai nostri strumenti di analisi.</li>
         <li><strong>Flessibilità</strong>: Scegli la durata della promozione in base alle tue esigenze.</li>
+        <li><strong>Risultati misurabili</strong>: Monitora da vicino l'impatto della promozione grazie ai nostri strumenti di analisi.</li>
       </ul>
     </article>
     <aside>
@@ -40,7 +40,7 @@ import Pagamento_promo from "@/components/Pagamento_promo.vue";
       <p>Durata minima: 7 giorni</p>
       <p>Durata: fino all'inzio dell'evento</p>
       <p>Posizionamento: Prima pagina -> prime 3 posizioni</p>
-      <button @click="Pagamento_promo.vue">Promuovi ora</button>
+      <button class="center-button" @click="Pagamento_promo.vue">Promuovi ora</button>
     </aside>
   </main>
   <footer>
@@ -49,4 +49,4 @@ import Pagamento_promo from "@/components/Pagamento_promo.vue";
   </body>
 </template>
 
-<style src = "../assets/main.css"></style>
+<style src="@/assets/main.css"></style>

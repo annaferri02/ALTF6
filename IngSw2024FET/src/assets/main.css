@@ -1,6 +1,7 @@
 @import './base.css';
 /*@import './promo.css';*/
 @import './biglietti.css';
+@import './pagamento.css';
 
 /* HEADER */
 .logo {
@@ -20,24 +21,11 @@
   align-items: center;
 }
 
-.buttonM {
-  background-color: #ffffff;
-  border-color: black;
-  border-width: 1px;
-  height: 40px;
-  border-radius: 5px;
-}
-
-.buttonM:hover {
-  background-color: grey;
-}
-
-/**/
-
 .riepilogo, .form-pagamento, .biglietto .biglietto_dettagli, .riepilogo_dettagli {
   display: flex;
   width: 400px;
 }
+
 .immagine_concerto{
   background-image: url(immagine_concerto.jpeg);
   width: 500px;

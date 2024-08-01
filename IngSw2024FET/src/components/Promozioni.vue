@@ -66,7 +66,7 @@ class Biglietto {
               <h3>Metti in esposizione</h3>
               <img src="@/assets/secondo.gif">
               <p>Etichetta l’evento come in “Esposizione”, facendolo apparire tra i primi risultati della ricerca.</p>
-              <p>A PARTIRE DA 0,55€</p>
+              <p>A PARTIRE DA 0,50€</p>
             </div>
           </a>
           <a href="/promo/promo3.vue">
@@ -82,7 +82,7 @@ class Biglietto {
               <h3>Promo 2 x 1</h3>
               <img src="@/assets/quarto.gif">
               <p>Combina le opzioni in rilievo e in esposizione ad un prezzo vantaggioso.</p>
-              <p>A PARTIRE DA 4,50€</p>
+              <p>A PARTIRE DA 1,20€</p>
             </div>
           </a>
         </div>
@@ -113,4 +113,4 @@ class Biglietto {
   </body>
 </template>
 
-<style src = "../assets/main.css"></style>
+<style src = "@/assets/main.css"></style>

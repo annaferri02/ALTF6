@@ -1,0 +1,56 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "indirizzo pagamento"
+        "indirizzo riepilogo";
+    column-gap: 10%;
+    width: 90%;
+}
+
+.dettagli-pagamento{
+    grid-area: pagamento;
+    justify-self: end;
+    margin-bottom: 20px;
+}
+
+.indirizzo-fatturazione{
+    grid-area: indirizzo;
+}
+
+.riepilogo-ordine{
+    grid-area: riepilogo;
+    justify-self: end;
+    align-self: end;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: #dddddd 1px solid;
+    background-color: transparent;
+    border-radius: 5px;
+    margin-bottom: 2px;
+}
+
+.centrale-button {
+    background-color: #ffffff;
+    border-color: black;
+    border-width: 1px;
+    height: 40px;
+    border-radius: 5px;
+    width: fit-content;
+    align-self: center;
+    justify-self: center;
+}
+
+.centrale-button:hover {
+    background-color: grey;
+}
