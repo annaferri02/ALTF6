@@ -52,9 +52,7 @@ public class TemplateRestConsumer {
 
     public static Transazioni callREST3(String resourceName, String uriBase, boolean useMock) {
         RestClient restClient = RestClient.create();
-        /*
-        Creo uriBase per chiamare Mockoon se l'impostazione è useMock
-         */
+
         if(useMock)
             uriBase = uriBaseMock;
 
@@ -64,6 +62,20 @@ public class TemplateRestConsumer {
                 .uri(uriBase + resourceName)
                 .retrieve()
                 .body(Transazioni.class);
+    }
+
+    public static String getIdOrg(String resourceName, String uriBase, boolean useMock) {
+        RestClient restClient = RestClient.create();
+        if(useMock)
+            uriBase = uriBaseMock;
+
+        System.out.println(uriBase+resourceName);
+
+        /*return restClient.get()
+                .uri(uriBase + resourceName)
+                .retrieve()
+                .body(String.class);*/
+        return "O0001";
     }
 
     public static Evento getEventoMock(String resourceName, String uriBase, boolean useMock) {

@@ -2,6 +2,39 @@
 
 import Pagamento from "@/components/Pagamento.vue";
 import Pagamento_promo from "@/components/Pagamento_promo.vue";
+import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from "axios";
+
+const router = useRouter();
+const data = ref<any[]>([]);
+const selectedValue = ref<string>('');
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/api/getEventiOrganizzatore');
+    data.value = response.data;
+    // Inizializza selectedValues con lo stesso numero di elementi di data
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+});const goToPromotion = async (promoPage: string) => {
+  try {
+    console.log('Selected value:', selectedValue.value);
+
+    const response = await axios.post('http://localhost:8080/api/getInfoPromo', {
+      nomeEvento: selectedValue.value, // Assicurati che sia una stringa o una lista di stringhe
+      nomePromo: "1"
+    });
+
+    console.log(response.data);
+    localStorage.setItem('infoPromo', JSON.stringify(response.data));
+    localStorage.setItem('promo', "1");
+    router.push({ path: promoPage });
+  } catch (error) {
+    console.error('Error sending data:', error);
+  }
+};
 </script>
 
 <template>
@@ -40,7 +73,15 @@ import Pagamento_promo from "@/components/Pagamento_promo.vue";
       <p>Durata minima: 7 giorni</p>
       <p>Durata: fino all'inzio dell'evento</p>
       <p>Posizionamento: Prima pagina -> prime 3 posizioni</p>
-      <button class="center-button" @click="Pagamento_promo.vue">Promuovi ora</button>
+
+      <select v-model="selectedValue" class="eventi">
+        <option value="">Seleziona Evento</option>
+        <option v-for="item in data" :key="item.id" :value="item">
+          {{ item }}
+        </option>
+      </select>
+
+      <button class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
     </aside>
   </main>
   <footer>

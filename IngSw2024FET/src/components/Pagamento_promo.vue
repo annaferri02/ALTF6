@@ -1,43 +1,35 @@
 <script setup lang="ts">
-import axios from 'axios';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
-/* Inseriamo in una variabile reattiva per ogni valore inserito dall'utente */
-const nome_cognome = ref('');
-const email = ref('');
-const residenza = ref('');
-const numero_carta = ref('');
-const scadenza = ref('');
-const cvv = ref('');
+const router = useRouter();
 
-//devo salvare i dati come stringa json nel backend:
-// Modo per salvare i dati nel backend, in questo caso è un metodo POST.
-//api/saveData è il percorso del backend, userData è l'oggetto che contiene i dati da salvare
-const saveData = async () => {
-  const userData = {
-    nome_cognome: nome_cognome.value,
-    email: email.value,
-    residenza: residenza.value,
-    numero_carta: numero_carta.value,
-    scadenza: scadenza.value,
-    cvv: cvv.value
-  };
-  try {
-    const response = await axios.post('http://localhost:3000/api/saveData', userData);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const riepilogoList = ref(0);
-
-/* Inseriamo nella variabile data il risultato della chiamata al backend */
-axios.get("/api/callREST2").then(response => {
-  console.log(JSON.stringify(response.data));
-  riepilogoList.value = response.data;
+const parsedData = ref({
+  Nome: '',
+  Prezzo: '',
+  Data: '',
+  Giorni: ''
 });
 
+const promo = ref('');
+
+onMounted(() => {
+  // Recupera i dati salvati nel localStorage
+  const tipoPromozione = localStorage.getItem('promo');
+  const storedData = localStorage.getItem('infoPromo');
+  console.log('Raw stored data:', storedData);
+
+  if (storedData) {
+    try {
+      const data = JSON.parse(storedData);
+      parsedData.value = data; // Assicurati che data abbia la struttura prevista
+    } catch (error) {
+      console.error('Error parsing stored data:', error);
+    }
+  }
+
+  promo.value = tipoPromozione || 'Non disponibile'; // Imposta un valore predefinito se nessun tipo di promozione è trovato
+});
 </script>
 
 <template>
@@ -96,11 +88,12 @@ axios.get("/api/callREST2").then(response => {
     <form class="riepilogo-ordine">
       <h2>Riepilogo ordine</h2>
       <!--Inserire i dati del riepilogo ordine ricevuti dal backend-->
-      <template v-for="item in riepilogoList">
-        <h2>Nome evento: {{ item.nome_evento}}</h2>
-        <p>Tipologia promozione: {{ item.tipologia_promozione}}</p>
-        <h2>Totale: {{ item.totale }}</h2>
-      </template>
+      <p>Nome evento: {{  parsedData.Nome }}</p>
+      <p>Prezzo: {{  parsedData.Prezzo }}</p>
+      <p>Data Inizio evneto: {{  parsedData.Data }}</p>
+      <p>Numero di giornate: {{  parsedData.Giorni }}</p>
+        <p>Tipologia promozione: {{  promo }}</p>
+
       <input type="submit" value="PAGA ORA" class="centrale-button">
     </form>
   </main>

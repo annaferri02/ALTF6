@@ -3,6 +3,7 @@ package it.unife.ingsw202324.MicroservizioBase.api;
 import it.unife.ingsw202324.MicroservizioBase.models.Biglietto;
 import it.unife.ingsw202324.MicroservizioBase.models.Evento;
 import it.unife.ingsw202324.MicroservizioBase.models.Luogo;
+import it.unife.ingsw202324.MicroservizioBase.models.Transazioni;
 import it.unife.ingsw202324.MicroservizioBase.services.ServiceTicket;
 import it.unife.ingsw202324.MicroservizioBase.services.TemplateRestConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -95,6 +98,19 @@ public class TicketController {
                 Biglietto bigliettoInserito = ticketService.addElement(biglietto);
                 bigliettiSalvati.add(bigliettoInserito);
             }
+
+            Transazioni transazione = new Transazioni();
+
+            transazione.setIdutente(utente);
+            Long costoTotale = 0L;
+            for (Biglietto biglietto : bigliettiSalvati) {
+                costoTotale += biglietto.getPrezzo();
+            }
+
+            transazione.setCosto(costoTotale);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedTimestamp = LocalDateTime.now().format(formatter);
+            transazione.setTimestamp(formattedTimestamp);
 
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Biglietti salvati con successo");

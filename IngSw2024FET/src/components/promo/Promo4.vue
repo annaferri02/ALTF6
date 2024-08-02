@@ -2,6 +2,27 @@
 
 import Pagamento from "@/components/Pagamento.vue";
 import Pagamento_promo from "@/components/Pagamento_promo.vue";
+import { useRouter } from 'vue-router';
+import {onMounted, ref} from "vue";
+import axios from "axios";
+
+const router = useRouter();
+
+const data = ref([]);
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/api/getEventiOrganizzatore');
+    data.value = response.data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+
+});
+const goToPromotion = (promoPage: string) => {
+  localStorage.setItem('promo', "4");
+  router.push({ path: promoPage });
+};
 </script>
 
 <template>
@@ -43,7 +64,15 @@ import Pagamento_promo from "@/components/Pagamento_promo.vue";
           <li><strong>Rimetti in Rilievo</strong>: Prima posizione nel feed degli eventi</li>
           <li><strong>Metti in Esposizione</strong>: Primi risultati delle ricerche pertinenti</li>
       </ul>
-      <button class="center-button" @click="Pagamento_promo.vue">Promuovi ora</button>
+
+      <template v-for="(item, index) in data" :key="index">
+        <select class="eventi">
+          <option>Evento</option>
+          <option>{{ item }} </option>
+        </select>
+      </template>
+
+      <button class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
     </aside>
   </main>
   <footer>
