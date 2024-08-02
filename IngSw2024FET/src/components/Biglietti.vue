@@ -2,6 +2,10 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 // Definisci le variabili reattive
 const count = ref(0);
 const biglietti = ref([]);
@@ -140,6 +144,9 @@ const vaiAlPagamento = async () => {
       count: count.value
     });
     console.log(response.data);
+    localStorage.setItem('paymentData', JSON.stringify(response.data));
+    router.push({ name: 'Pagamento' });
+
   } catch (error) {
     console.error('Error sending data:', error);
   }

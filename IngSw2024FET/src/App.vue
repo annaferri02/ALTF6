@@ -3,7 +3,10 @@ import HelloWorld from './components/Biglietti.vue'
 </script>
 
 <template>
-  <main>
+  <!--<main>
     <HelloWorld />
-  </main>
+  </main>-->
+    <div id="app">
+      <router-view />
+    </div>
 </template>
