@@ -257,7 +257,7 @@ const vaiAlPagamento = async () => {
       <br><br>
       <h3 style=" margin-left: 13%; margin-top: 40px">Seleziona la categoria di posti che desideri acquistare:</h3>
       <select v-model="selezioneTribuna">
-        <option value="" disabled>Categoria</option>
+        <option value="" >Categoria</option>
         <option v-for="opzione in opzioniMenu" :key="opzione" :value="opzione">
           {{ opzione }}
         </option>
