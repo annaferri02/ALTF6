@@ -15,10 +15,12 @@ onMounted(async () => {
     const response = await axios.get('http://localhost:8080/api/getEventiOrganizzatore');
     data.value = response.data;
     // Inizializza selectedValues con lo stesso numero di elementi di data
+    console.log('Data:', data.value);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-});const goToPromotion = async (promoPage: string) => {
+});
+const goToPromotion = async (promoPage: string) => {
   try {
     console.log('Selected value:', selectedValue.value);
 
@@ -70,7 +72,6 @@ onMounted(async () => {
     <aside>
       <h3>Dettagli Promozione</h3>
       <p>Costo giornaliero: 0.80€</p>
-      <p>Durata minima: 7 giorni</p>
       <p>Durata: fino all'inzio dell'evento</p>
       <p>Posizionamento: Prima pagina -> prime 3 posizioni</p>
 

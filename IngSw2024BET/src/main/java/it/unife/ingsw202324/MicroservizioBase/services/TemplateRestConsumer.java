@@ -1,6 +1,8 @@
 package it.unife.ingsw202324.MicroservizioBase.services;
 
 
+        import com.fasterxml.jackson.databind.JsonNode;
+        import com.fasterxml.jackson.databind.ObjectMapper;
         import it.unife.ingsw202324.MicroservizioBase.models.Biglietto;
         import it.unife.ingsw202324.MicroservizioBase.models.Evento;
         import it.unife.ingsw202324.MicroservizioBase.models.Luogo;
@@ -8,6 +10,7 @@ package it.unife.ingsw202324.MicroservizioBase.services;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
         import org.springframework.web.client.RestClient;
 
+        import java.io.IOException;
         import java.time.LocalDate;
 
 
@@ -80,21 +83,27 @@ public class TemplateRestConsumer {
 
     public static Evento getEventoMock(String resourceName, String uriBase, boolean useMock) {
         /*RestClient restClient = RestClient.create();
-        /*
-        Creo uriBase per chiamare Mockoon se l'impostazione è useMock
 
-        if(useMock)
+        if (useMock) {
             uriBase = uriBaseMock;
+        }
 
-        System.out.println(uriBase+resourceName);
         String fullUri = uriBase + resourceName;
-
+        System.out.println("Request URI: " + fullUri);
 
         try {
-            return restClient.get()
+            // Recupera la risposta come una stringa JSON
+            String jsonResponse = restClient.get()
                     .uri(fullUri)
                     .retrieve()
-                    .body(Evento.class);
+                    .body(String.class);// Usato block() per ottenere il risultato sincrono in un contesto non reattivo
+
+            // Usa ObjectMapper per deserializzare la risposta in un oggetto Evento
+            ObjectMapper objectMapper = new ObjectMapper();
+            Evento evento = objectMapper.readValue(jsonResponse, Evento.class);
+
+            System.out.println("Evento retrieved: " + evento);
+            return evento;
         } catch (Exception e) {
             System.err.println("Error while fetching Evento: " + e.getMessage());
             e.printStackTrace();
@@ -113,9 +122,9 @@ public class TemplateRestConsumer {
     }
 
     public static Luogo getLuogoMock(String resourceName, String uriBase, boolean useMock) {
-     /*  RestClient restClient = RestClient.create();
-        /*
-        Creo uriBase per chiamare Mockoon se l'impostazione è useMock
+       /*RestClient restClient = RestClient.create();
+
+        //Creo uriBase per chiamare Mockoon se l'impostazione è useMock
 
         if(useMock)
             uriBase = uriBaseMock;
@@ -128,13 +137,13 @@ public class TemplateRestConsumer {
             return restClient.get()
                     .uri(fullUri)
                     .retrieve()
-                    .body(Luogo.class);
+                    .body(String.class);
         } catch (Exception e) {
             System.err.println("Error while fetching Evento: " + e.getMessage());
             e.printStackTrace();
             return null;
-        }*/
-
+        }
+*/
         Luogo luogo = new Luogo();
         luogo.setIdLuogo("L00001");
         luogo.setNome("Teatro Nuovo");

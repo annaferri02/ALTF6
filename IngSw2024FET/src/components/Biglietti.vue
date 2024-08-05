@@ -30,6 +30,8 @@ const fetchData = async () => {
     luogo.value = data.luogo;
     postiOccupati.value = data.biglietti;  // Usa biglietti come posti occupati
 
+    console.log('Dati ricevuti:', data);
+
     // Estrai le opzioni del menù
     if (luogo.value.tipologia === 'Indoor') {
       opzioniMenu.value = ['Parterre', 'Parterre VIP'];

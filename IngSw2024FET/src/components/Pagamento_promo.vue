@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from "axios";
 
 const router = useRouter();
 
@@ -30,6 +31,28 @@ onMounted(() => {
 
   promo.value = tipoPromozione || 'Non disponibile'; // Imposta un valore predefinito se nessun tipo di promozione è trovato
 });
+
+const goToPromotion = async () => {
+  try {
+    console.log('Sending data:', {
+      NomeEvento: parsedData.value.Nome,
+      Prezzo: parsedData.value.Prezzo,
+      TipologiaPromozione: promo.value
+    });
+
+    const response = await axios.post('http://localhost:8080/api/processPromoOrder', {
+      NomeEvento: parsedData.value.Nome,
+      Prezzo: parsedData.value.Prezzo,
+      TipologiaPromozione: promo.value
+    });
+
+    console.log('Response:', response.data);
+    router.push({ name: 'PagamentoEffettuato' });
+  } catch (error) {
+    console.error('Error sending data:', error);
+  }
+};
+
 </script>
 
 <template>
@@ -85,17 +108,15 @@ onMounted(() => {
       <label for="cvv">CVV</label>
       <input type="text" id="cvv" name="cvv" required maxlength="3" pattern="\d{3}" >
     </div>
-    <form class="riepilogo-ordine">
       <h2>Riepilogo ordine</h2>
       <!--Inserire i dati del riepilogo ordine ricevuti dal backend-->
       <p>Nome evento: {{  parsedData.Nome }}</p>
       <p>Prezzo: {{  parsedData.Prezzo }}</p>
-      <p>Data Inizio evneto: {{  parsedData.Data }}</p>
+      <p>Data Inizio evento: {{  parsedData.Data }}</p>
       <p>Numero di giornate: {{  parsedData.Giorni }}</p>
-        <p>Tipologia promozione: {{  promo }}</p>
+      <p>Tipologia promozione: {{ promo }}</p>
 
-      <input type="submit" value="PAGA ORA" class="centrale-button">
-    </form>
+      <button class="center-button" @click="goToPromotion()">PAGA ORA </button>
   </main>
 
   <footer>

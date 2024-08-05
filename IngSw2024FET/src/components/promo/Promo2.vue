@@ -2,27 +2,40 @@
 
 import Pagamento from "@/components/Pagamento.vue";
 import Pagamento_promo from "@/components/Pagamento_promo.vue";
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import {onMounted, ref} from "vue";
 import axios from "axios";
 
 const router = useRouter();
-const data = ref([]);
-
+const data = ref<any[]>([]);
+const selectedValue = ref<string>('');
 
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8080/api/getEventiOrganizzatore');
     data.value = response.data;
+    // Inizializza selectedValues con lo stesso numero di elementi di data
+    console.log('Data:', data.value);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-
 });
+const goToPromotion = async (promoPage: string) => {
+  try {
+    console.log('Selected value:', selectedValue.value);
 
-const goToPromotion = (promoPage: string) => {
-  localStorage.setItem('promo', "2");
-  router.push({ path: promoPage });
+    const response = await axios.post('http://localhost:8080/api/getInfoPromo', {
+      nomeEvento: selectedValue.value, // Assicurati che sia una stringa o una lista di stringhe
+      nomePromo: "2"
+    });
+
+    console.log(response.data);
+    localStorage.setItem('infoPromo', JSON.stringify(response.data));
+    localStorage.setItem('promo', "2");
+    router.push({ path: promoPage });
+  } catch (error) {
+    console.error('Error sending data:', error);
+  }
 };
 </script>
 
@@ -63,12 +76,13 @@ const goToPromotion = (promoPage: string) => {
       <p>Durata: fino all'inzio dell'evento</p>
       <p>Posizionamento: Risultati ricerche -> prime 3 posizioni</p>
 
-      <template v-for="(item, index) in data" :key="index">
-        <select class="eventi">
-          <option>Evento</option>
-          <option>{{ item }} </option>
-        </select>
-      </template>
+      <select v-model="selectedValue" class="eventi">
+        <option value="">Seleziona Evento</option>
+        <option v-for="item in data" :key="item.id" :value="item">
+          {{ item }}
+        </option>
+      </select>
+
       <button class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
     </aside>
   </main>

@@ -1,11 +1,7 @@
 package it.unife.ingsw202324.MicroservizioBase.api;
 
-import it.unife.ingsw202324.MicroservizioBase.models.Biglietto;
-import it.unife.ingsw202324.MicroservizioBase.models.Evento;
-import it.unife.ingsw202324.MicroservizioBase.models.Luogo;
-import it.unife.ingsw202324.MicroservizioBase.models.Transazioni;
-import it.unife.ingsw202324.MicroservizioBase.services.ServiceTicket;
-import it.unife.ingsw202324.MicroservizioBase.services.TemplateRestConsumer;
+import it.unife.ingsw202324.MicroservizioBase.models.*;
+import it.unife.ingsw202324.MicroservizioBase.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +19,12 @@ import java.util.Map;
 public class TicketController {
     @Autowired
     ServiceTicket ticketService;
+    @Autowired
+    EventoService eventoService;
+    @Autowired
+    LuogoService luogoService;
+    @Autowired
+    ServiceTransazioni transazioniService;
 
     @RequestMapping("/costobiglietti") /* Annotation per definire il path del metodo (relativo alla classe)  */
     public List<Biglietto> testMysql() {
@@ -35,18 +37,42 @@ public class TicketController {
         return ticketService.addElement(this.callRest()).toString();
     }
 
-    @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
+  /*  @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
     @GetMapping("/getInfoBiglietti")
     public TicketData getInfoBiglietti() {
-
         TicketData ticketData = new TicketData();
 
-        ticketData.setEvento(TemplateRestConsumer.getEventoMock("evento", null, true));
-        ticketData.setLuogo(TemplateRestConsumer.getLuogoMock("luogo", null, true));
-        ticketData.setBiglietti(ticketService.getPostiByIdEvento(ticketData.getEvento().getID_Evento()));
+        try {
+            ticketData.setEvento(TemplateRestConsumer.getEventoMock("evento", null, true));
+            System.out.println(ticketData.getEvento().toString() + "|||||||||||||||||||===0304309439403940343403ekkfskfdksfsdfjdskjfdsk");
+
+            if (ticketData.getEvento() == null) {
+                throw new RuntimeException("Evento is null");
+            }
+
+            ticketData.setLuogo(luogoService.getLuogoById(ticketData.getEvento().getIdLuogo()));
+            ticketData.setBiglietti(ticketService.getPostiByIdEvento(ticketData.getEvento().getID_Evento()));
+        } catch (Exception e) {
+            System.err.println("Error in getInfoBiglietti: " + e.getMessage());
+            e.printStackTrace();
+            throw e; // Rilancia l'eccezione per la gestione globale dell'errore
+        }
 
         return ticketData;
-    }
+    }*/
+  @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
+  @GetMapping("/getInfoBiglietti")
+  public TicketData getInfoBiglietti() {
+      TicketData ticketData = new TicketData();
+
+      ticketData.setEvento(TemplateRestConsumer.getEventoMock("evento", null, true));
+      ticketData.setLuogo(TemplateRestConsumer.getLuogoMock("luogo", null, true));
+        ticketData.setBiglietti(ticketService.getPostiByIdEvento(ticketData.getEvento().getID_Evento()));
+
+      return ticketData;
+  }
+
+
 
     @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
     @PostMapping("/Pagamento")
@@ -111,6 +137,8 @@ public class TicketController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedTimestamp = LocalDateTime.now().format(formatter);
             transazione.setTimestamp(formattedTimestamp);
+            transazioniService.insert(transazione);
+
 
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Biglietti salvati con successo");
@@ -198,34 +226,3 @@ public class TicketController {
 }
 
 
-
-class TicketData {
-    private List<String> biglietti;
-    private Evento evento;
-    private Luogo luogo;
-
-    public List<String> getBiglietti() {
-        return biglietti;
-    }
-
-    public void setBiglietti(List<String > biglietti) {
-        this.biglietti = biglietti;
-    }
-
-    public Evento getEvento() {
-        return evento;
-    }
-
-    public void setEvento(Evento evento) {
-        this.evento = evento;
-    }
-
-    public Luogo getLuogo() {
-        return luogo;
-    }
-
-    public void setLuogo(Luogo luogo) {
-        this.luogo = luogo;
-    }
-
-}

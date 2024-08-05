@@ -1,5 +1,6 @@
 package it.unife.ingsw202324.MicroservizioBase.repositories;
 
+import it.unife.ingsw202324.MicroservizioBase.models.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,5 +13,11 @@ public interface EventoRepository extends JpaRepository<it.unife.ingsw202324.Mic
 
     @Query("SELECT E.Data FROM Evento E WHERE E.Nome = :Nome")
     public Date getDataEvento(@Param("Nome") String Nome);
+
+    @Query("SELECT E.ID_Evento FROM Evento E WHERE E.Nome = :Nome")
+    public String getIDEvento(@Param("Nome") String Nome);
+
+    @Query("SELECT Evento FROM Evento E WHERE E.ID_Evento = :ID_Evento")
+    public Evento getEventoByID(@Param("ID_Evento") String ID_Evento);
 
 }
