@@ -30,15 +30,15 @@ const fetchData = async () => {
     luogo.value = data.luogo;
     postiOccupati.value = data.biglietti;  // Usa biglietti come posti occupati
 
-    console.log('Dati ricevuti:', data);
+    console.log('Dati ricevuti:', data.luogo);
 
     // Estrai le opzioni del menù
-    if (luogo.value.tipologia === 'Indoor') {
+    if (luogo.value.Tipologia === 'Indoor') {
       opzioniMenu.value = ['Parterre', 'Parterre VIP'];
       mostraPiantina.value = true;
       // Popola tribune
       tribune.value = ['tribuna', 'tribuna-dx', 'tribuna-sx'];
-    } else if (luogo.value.tipologia === 'Outdoor') {
+    } else if (luogo.value.Tipologia === 'Outdoor') {
       opzioniMenu.value = ['Pit', 'Pit GOLD'];
       mostraPiantina.value = false;
     }

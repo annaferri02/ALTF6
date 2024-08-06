@@ -82,7 +82,7 @@ public class TemplateRestConsumer {
     }
 
     public static Evento getEventoMock(String resourceName, String uriBase, boolean useMock) {
-        /*RestClient restClient = RestClient.create();
+        RestClient restClient = RestClient.create();
 
         if (useMock) {
             uriBase = uriBaseMock;
@@ -96,11 +96,15 @@ public class TemplateRestConsumer {
             String jsonResponse = restClient.get()
                     .uri(fullUri)
                     .retrieve()
-                    .body(String.class);// Usato block() per ottenere il risultato sincrono in un contesto non reattivo
+                    .body(String.class); // Usato block() per ottenere il risultato sincrono in un contesto non reattivo
 
-            // Usa ObjectMapper per deserializzare la risposta in un oggetto Evento
+            // Usa ObjectMapper per estrarre l'oggetto "evento"
             ObjectMapper objectMapper = new ObjectMapper();
-            Evento evento = objectMapper.readValue(jsonResponse, Evento.class);
+            JsonNode rootNode = objectMapper.readTree(jsonResponse);
+            JsonNode eventoNode = rootNode.path("evento");
+
+            // Deserializza solo l'oggetto "evento"
+            Evento evento = objectMapper.treeToValue(eventoNode, Evento.class);
 
             System.out.println("Evento retrieved: " + evento);
             return evento;
@@ -108,54 +112,43 @@ public class TemplateRestConsumer {
             System.err.println("Error while fetching Evento: " + e.getMessage());
             e.printStackTrace();
             return null;
-        }*/
+        }
 
-        Evento evento = new Evento();
-        evento.setID_Evento("E0001");
-        evento.setNome("Concerto Live");
-        //evento.setData(20241231L);
-        evento.setDescrizione("Concerto live di artisti famosi");
-        evento.setID_Organizzatore("O0001");
-        evento.setFlag_ticket(true);
-        evento.setIdLuogo("L00001");
-        return evento;
     }
 
     public static Luogo getLuogoMock(String resourceName, String uriBase, boolean useMock) {
-       /*RestClient restClient = RestClient.create();
+        RestClient restClient = RestClient.create();
 
-        //Creo uriBase per chiamare Mockoon se l'impostazione è useMock
-
-        if(useMock)
+        if (useMock) {
             uriBase = uriBaseMock;
+        }
 
-        System.out.println(uriBase+resourceName);
         String fullUri = uriBase + resourceName;
-
+        System.out.println("Request URI: " + fullUri);
 
         try {
-            return restClient.get()
+            // Recupera la risposta come una stringa JSON
+            String jsonResponse = restClient.get()
                     .uri(fullUri)
                     .retrieve()
                     .body(String.class);
+
+            // Usa ObjectMapper per estrarre l'oggetto "luogo"
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootNode = objectMapper.readTree(jsonResponse);
+            JsonNode luogoNode = rootNode.path("luogo");
+
+            // Deserializza solo l'oggetto "luogo"
+            Luogo luogo = objectMapper.treeToValue(luogoNode, Luogo.class);
+
+            System.out.println("Luogo retrieved: " + luogo);
+            return luogo;
         } catch (Exception e) {
-            System.err.println("Error while fetching Evento: " + e.getMessage());
+            System.err.println("Error while fetching Luogo: " + e.getMessage());
             e.printStackTrace();
             return null;
         }
-*/
-        Luogo luogo = new Luogo();
-        luogo.setIdLuogo("L00001");
-        luogo.setNome("Teatro Nuovo");
-        luogo.setVia("Via Roma");
-        luogo.setNumCivico("1");
-        luogo.setCap("00100");
-        luogo.setProvincia("RM");
-        luogo.setStato("Italia");
-        luogo.setCitta("Roma");
-        //luogo.setCapienza(500);
-        luogo.setTipologia("Indoor");
-        return luogo;
+
     }
 
 

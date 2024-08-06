@@ -1,5 +1,6 @@
 package it.unife.ingsw202324.MicroservizioBase.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -7,24 +8,42 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "Luogo")
 public class Luogo {
 
     @Id
+    @JsonProperty("IdLuogo")
     private String idLuogo;
+
+    @JsonProperty("Via")
     private String via;
+
+    @JsonProperty("NumCivico")
     private String numCivico;
+
+    @JsonProperty("CAP")
     private String cap;
+
+    @JsonProperty("Provincia")
     private String provincia;
+
+    @JsonProperty("Stato")
     private String stato;
+
+    @JsonProperty("Città")
     private String citta;
+
+    @JsonProperty("Capienza")
     private Integer capienza;
+
+    @JsonProperty("Tipologia")
     private String tipologia;
+
+    @JsonProperty("Nome")
     private String nome;
 
-    // Getters and Setters
+    // Getters e setters
 
     public String getIdLuogo() {
         return idLuogo;
@@ -106,4 +125,3 @@ public class Luogo {
         this.nome = nome;
     }
 }
-

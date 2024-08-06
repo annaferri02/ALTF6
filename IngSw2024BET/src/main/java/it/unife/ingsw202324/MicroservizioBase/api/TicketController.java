@@ -66,8 +66,12 @@ public class TicketController {
       TicketData ticketData = new TicketData();
 
       ticketData.setEvento(TemplateRestConsumer.getEventoMock("evento", null, true));
+
       ticketData.setLuogo(TemplateRestConsumer.getLuogoMock("luogo", null, true));
-        ticketData.setBiglietti(ticketService.getPostiByIdEvento(ticketData.getEvento().getID_Evento()));
+
+      ticketData.setBiglietti(ticketService.getPostiByIdEvento(ticketData.getEvento().getID_Evento()));
+
+
 
       return ticketData;
   }
