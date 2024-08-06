@@ -9,6 +9,7 @@ const router = useRouter();
 // Definisci le variabili reattive
 const count = ref(0);
 const biglietti = ref([]);
+const prezzi = ref([]);
 const evento = ref({});
 const luogo = ref({});
 const opzioniMenu = ref([]);
@@ -29,6 +30,8 @@ const fetchData = async () => {
     evento.value = data.evento;
     luogo.value = data.luogo;
     postiOccupati.value = data.biglietti;  // Usa biglietti come posti occupati
+    prezzi.value = data.prezzi;
+
 
     console.log('Dati ricevuti:', data.luogo);
 
@@ -143,10 +146,11 @@ const vaiAlPagamento = async () => {
     const response = await axios.post('http://localhost:8080/ticket/gotoPagamento', {
       tribuna: selezioneTribuna.value,
       postiSelezionati: postiSelezionati.value,
-      count: count.value
+      count: count.value,
     });
     console.log(response.data);
     localStorage.setItem('paymentData', JSON.stringify(response.data));
+    localStorage.setItem('prezzi', JSON.stringify(prezzi.value));
     router.push({ name: 'Pagamento' });
 
   } catch (error) {
@@ -180,14 +184,16 @@ const vaiAlPagamento = async () => {
     <div>
       <div v-if="mostraPiantina">
         <h3 class="centrato">Seleziona i posti numerati che desideri acquistare direttamente dalla piantina e i posti in parterre dal men&ugrave; sottostante</h3>
+
         <select class="tariffe">
           <option>Tariffe</option>
-          <option>Parterre 50 &euro;</option>
-          <option>Parterre VIP 100 &euro;</option>
-          <option>Tribuna frontale 70 &euro;</option>
-          <option>Tribuna laterale destra 90 &euro;</option>
-          <option>Tribuna laterale sinistra 90 &euro;</option>
+          <option>Parterre {{ prezzi[0] }} &euro;</option>
+          <option>Parterre VIP {{ prezzi[1] }} &euro;</option>
+          <option>Tribuna frontale {{ prezzi[2] }} &euro;</option>
+          <option>Tribuna laterale destra {{ prezzi[3] }} &euro;</option>
+          <option>Tribuna laterale sinistra {{ prezzi[4] }} &euro;</option>
         </select>
+
         <section class="piantina">
           <table id="palco">
             <tr>
@@ -258,12 +264,14 @@ const vaiAlPagamento = async () => {
       </div>
       <br><br>
       <h3 style=" margin-left: 13%; margin-top: 40px">Seleziona la categoria di posti che desideri acquistare:</h3>
+
       <select v-model="selezioneTribuna">
         <option value="" >Categoria</option>
         <option v-for="opzione in opzioniMenu" :key="opzione" :value="opzione">
           {{ opzione }}
         </option>
       </select>
+
       <br>
       <br>
       <div>

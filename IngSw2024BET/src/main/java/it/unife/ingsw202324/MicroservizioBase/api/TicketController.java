@@ -37,29 +37,7 @@ public class TicketController {
         return ticketService.addElement(this.callRest()).toString();
     }
 
-  /*  @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
-    @GetMapping("/getInfoBiglietti")
-    public TicketData getInfoBiglietti() {
-        TicketData ticketData = new TicketData();
 
-        try {
-            ticketData.setEvento(TemplateRestConsumer.getEventoMock("evento", null, true));
-            System.out.println(ticketData.getEvento().toString() + "|||||||||||||||||||===0304309439403940343403ekkfskfdksfsdfjdskjfdsk");
-
-            if (ticketData.getEvento() == null) {
-                throw new RuntimeException("Evento is null");
-            }
-
-            ticketData.setLuogo(luogoService.getLuogoById(ticketData.getEvento().getIdLuogo()));
-            ticketData.setBiglietti(ticketService.getPostiByIdEvento(ticketData.getEvento().getID_Evento()));
-        } catch (Exception e) {
-            System.err.println("Error in getInfoBiglietti: " + e.getMessage());
-            e.printStackTrace();
-            throw e; // Rilancia l'eccezione per la gestione globale dell'errore
-        }
-
-        return ticketData;
-    }*/
   @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
   @GetMapping("/getInfoBiglietti")
   public TicketData getInfoBiglietti() {
@@ -71,7 +49,7 @@ public class TicketController {
 
       ticketData.setBiglietti(ticketService.getPostiByIdEvento(ticketData.getEvento().getID_Evento()));
 
-
+      ticketData.setPrezzi(TemplateRestConsumer.getPricesMock("prices", null, true));
 
       return ticketData;
   }
@@ -165,6 +143,8 @@ public class TicketController {
         String tribuna = (String) request.get("tribuna");
         List<Integer> postiSelezionati = (List<Integer>) request.get("postiSelezionati");
         int count = (int) request.get("count");
+
+
 
 
         // Esegui le operazioni necessarie con i dati ricevuti

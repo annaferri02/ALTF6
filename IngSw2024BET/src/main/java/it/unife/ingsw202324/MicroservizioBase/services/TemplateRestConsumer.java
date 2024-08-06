@@ -12,6 +12,9 @@ package it.unife.ingsw202324.MicroservizioBase.services;
 
         import java.io.IOException;
         import java.time.LocalDate;
+        import java.util.ArrayList;
+        import java.util.Iterator;
+        import java.util.List;
 
 
 @SpringBootApplication
@@ -150,6 +153,47 @@ public class TemplateRestConsumer {
         }
 
     }
+
+    public static List<String> getPricesMock(String resourceName, String uriBase, boolean useMock) {
+        RestClient restClient = RestClient.create();
+        List<String> prices = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (useMock) {
+            uriBase = uriBaseMock;
+        }
+
+        String fullUri = uriBase + resourceName;
+        System.out.println("Request URI: " + fullUri);
+
+        try {
+            // Recupera la risposta come una stringa JSON
+            String jsonResponse = restClient.get()
+                    .uri(fullUri)
+                    .retrieve()
+                    .body(String.class);
+
+                // Usa ObjectMapper per leggere il JSON
+                JsonNode rootNode = objectMapper.readTree(jsonResponse);
+
+                // Itera attraverso i valori del JSON
+                Iterator<JsonNode> elements = rootNode.elements();
+                while (elements.hasNext()) {
+                    JsonNode valueNode = elements.next();
+                    String value = valueNode.asText();
+                    prices.add(value);
+                }
+
+                System.out.println("Prices retrieved: " + prices);
+            } catch (Exception e) {
+                System.err.println("Error while processing JSON: " + e.getMessage());
+                e.printStackTrace();
+            }
+
+            return prices;
+
+    }
+
 
 
 }

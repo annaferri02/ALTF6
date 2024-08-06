@@ -5,16 +5,22 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
+
 const storedDataList = ref([]);
+const prezziDataList = ref([]);
 
 onMounted(() => {
   // Recupera i dati salvati nel localStorage
   const storedData = localStorage.getItem('paymentData');
+  const prezzi = localStorage.getItem('prezzi');
   console.log('Raw stored data:', storedData);
+  console.log('Raw stored data:', prezzi);
   if (storedData) {
     try {
       const parsedData = JSON.parse(storedData);
+      const parsedPrezzi = JSON.parse(prezzi);
       storedDataList.value = parsedData.posti || []; // Accedi alla proprietà "posti"
+      prezziDataList.value = parsedPrezzi || [];
       console.log('Parsed stored data:', storedDataList.value);
     } catch (error) {
       console.error('Error parsing stored data:', error);
@@ -32,11 +38,7 @@ const vaiAlPagamento = async (event: Event) => {
       utente: '1',
       evento: 'E0001'
     });
-    console.log('Dati inviati:', {
-      biglietti: storedDataList.value,
-      utente: '1',
-      evento: 'E0001'
-    });
+
     console.log(response.data);
     router.push({ name: 'PagamentoEffettuato' });
   } catch (error) {
@@ -106,19 +108,19 @@ const vaiAlPagamento = async (event: Event) => {
         <div v-for="(item, index) in storedDataList" :key="index">
           <p>Tipo biglietto: {{ item.Tipo }}</p>
           <template v-if="item.Tipo === 'Tribuna Centrale'">
-            <p> Prezzo: 70 &euro;</p>
+            <p> Prezzo: {{prezziDataList[2]}} &euro;</p>
           </template>
           <template v-else-if="item.Tipo === 'Tribuna Destra'">
-            <p> Prezzo: 90 &euro;</p>
+            <p> Prezzo: {{prezziDataList[3]}} &euro;</p>
           </template>
           <template v-else-if="item.Tipo === 'Tribuna Sinistra'">
-            <p> Prezzo: 90 &euro;</p>
+            <p> Prezzo: {{prezziDataList[4]}} &euro;</p>
           </template>
           <template v-else-if="item.Tipo === 'Parterre' || item.Tipo === 'Pit'">
-            <p> Prezzo: 50 &euro;</p>
+            <p> Prezzo: {{ prezziDataList[0] }} &euro;</p>
           </template>
           <template v-else-if="item.Tipo === 'Parterre VIP' || item.Tipo === 'Pit GOLD'">
-            <p> Prezzo: 100 &euro;</p>
+            <p> Prezzo: {{prezziDataList[1]}} &euro;</p>
           </template>
           <template v-if="item.Posto > 0">
             <p>Posto: {{ item.Posto }}</p>
