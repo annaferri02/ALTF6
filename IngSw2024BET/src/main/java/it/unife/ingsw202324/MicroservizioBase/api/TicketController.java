@@ -26,19 +26,19 @@ public class TicketController {
     @Autowired
     ServiceTransazioni transazioniService;
 
-    @RequestMapping("/costobiglietti") /* Annotation per definire il path del metodo (relativo alla classe)  */
+    /*@RequestMapping("/costobiglietti")  Annotation per definire il path del metodo (relativo alla classe)
     public List<Biglietto> testMysql() {
         return ticketService.getAll();
     }
 
-    @RequestMapping("/testWithElements") /* Annotation per definire il path del metodo (relativo alla classe)  */
+    @RequestMapping("/testWithElements") /* Annotation per definire il path del metodo (relativo alla classe)
     public String addElement() {
-        /* Chiamata a un servizio che ritorna inserisce dati e ritorna il db */
+        /* Chiamata a un servizio che ritorna inserisce dati e ritorna il db
         return ticketService.addElement(this.callRest()).toString();
-    }
+    }*/
 
 
-  @CrossOrigin(origins = "http://localhost:5174") // Aggiungi questa linea
+  @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
   @GetMapping("/getInfoBiglietti")
   public TicketData getInfoBiglietti() {
       TicketData ticketData = new TicketData();
@@ -56,7 +56,7 @@ public class TicketController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:5174") // Aggiungi questa linea
+    @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
     @PostMapping("/Pagamento")
     public ResponseEntity<Map<String, Object>> pay(@RequestBody Map<String, Object> request) {
         try {
@@ -136,16 +136,13 @@ public class TicketController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:5174") // Aggiungi questa linea
+    @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
     @PostMapping("/gotoPagamento")
     public ResponseEntity<Map<String, Object>> bookSeats(@RequestBody Map<String, Object> request) {
         // Estrai i dati dal map
         String tribuna = (String) request.get("tribuna");
         List<Integer> postiSelezionati = (List<Integer>) request.get("postiSelezionati");
         int count = (int) request.get("count");
-
-
-
 
         // Esegui le operazioni necessarie con i dati ricevuti
 

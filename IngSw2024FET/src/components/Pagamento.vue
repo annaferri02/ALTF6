@@ -8,6 +8,8 @@ const router = useRouter();
 
 const storedDataList = ref([]);
 const prezziDataList = ref([]);
+const scadenza = ref('');
+
 
 onMounted(() => {
   // Recupera i dati salvati nel localStorage
@@ -31,7 +33,19 @@ onMounted(() => {
 
 
 const vaiAlPagamento = async (event: Event) => {
+
+
   event.preventDefault(); // Previene il comportamento predefinito del pulsante
+
+
+  // Controllo della data di scadenza
+  const today = new Date();
+  const scadenzaData = new Date(scadenza.value + '-01'); // Formatta come YYYY-MM-01
+  if (scadenzaData < today) {
+    alert('La data di scadenza della carta di credito è scaduta.');
+    return; // Interrompe l'esecuzione se la data è scaduta
+  }
+
   try {
     const response = await axios.post('http://localhost:8080/ticket/Pagamento', {
       biglietti: storedDataList.value,
@@ -68,72 +82,72 @@ const vaiAlPagamento = async (event: Event) => {
       </div>
     </div>
   </header>
-  <main class="main-pagamento">
-    <div class="indirizzo-fatturazione">
-      <h2>Indirizzo di fatturazione</h2>
-      <label for="nome2">Nome</label>
-      <input type="text" id="nome2" name="nome2" required>
-      <label for="cognome2">Cognome</label>
-      <input type="text" id="cognome2" name="cognome2" required>
-      <label for="indirizzo">Indirizzo</label>
-      <input type="text" id="indirizzo" name="indirizzo" required>
-      <label for="citta">Citt&agrave;</label>
-      <input type="text" id="citta" name="citta" required>
-      <label for="provincia">Provincia</label>
-      <input type="text" id="provincia" name="provincia" required>
-      <label for="cap">CAP</label>
-      <input type="text" id="cap" name="cap" required>
-      <label for="stato">Stato</label>
-      <input type="text" id="stato" name="stato" required>
-      <label for="telefono">Numero di telefono</label>
-      <input type="tel" id="telefono" name="telefono" required>
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div class="dettagli-pagamento">
-      <h2>Dettagli Pagamento</h2>
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" name="nome" required>
-      <label for="cognome">Cognome</label>
-      <input type="text" id="cognome" name="cognome" required>
-      <label for="numeroCarta">Numero carta</label>
-      <input type="text" id="numeroCarta" name="numeroCarta" pattern="\d{16}" maxlength="16" required>
-      <label for="scadenza">Data di scadenza</label>
-      <input type="month" id="scadenza" name="scadenza" required>
-      <label for="cvv">CVV</label>
-      <input type="text" id="cvv" name="cvv" required maxlength="3" pattern="\d{3}">
-    </div>
-    <form class="riepilogo-ordine" @submit.prevent="vaiAlPagamento">
-      <h2>Riepilogo ordine</h2>
-      <template v-if="storedDataList && storedDataList.length">
-        <div v-for="(item, index) in storedDataList" :key="index">
-          <p>Tipo biglietto: {{ item.Tipo }}</p>
-          <template v-if="item.Tipo === 'Tribuna Centrale'">
-            <p> Prezzo: {{prezziDataList[2]}} &euro;</p>
-          </template>
-          <template v-else-if="item.Tipo === 'Tribuna Destra'">
-            <p> Prezzo: {{prezziDataList[3]}} &euro;</p>
-          </template>
-          <template v-else-if="item.Tipo === 'Tribuna Sinistra'">
-            <p> Prezzo: {{prezziDataList[4]}} &euro;</p>
-          </template>
-          <template v-else-if="item.Tipo === 'Parterre' || item.Tipo === 'Pit'">
-            <p> Prezzo: {{ prezziDataList[0] }} &euro;</p>
-          </template>
-          <template v-else-if="item.Tipo === 'Parterre VIP' || item.Tipo === 'Pit GOLD'">
-            <p> Prezzo: {{prezziDataList[1]}} &euro;</p>
-          </template>
-          <template v-if="item.Posto > 0">
-            <p>Posto: {{ item.Posto }}</p>
-          </template>
-        </div>
-      </template>
-      <template v-else>
-        <p>Nessun biglietto trovato.</p>
-      </template>
-      <button type="submit" style="margin-left: 40%; margin-top: 20px" class="center-button">PAGA ORA</button>
+  <form class="main-pagamento"  @submit.prevent="vaiAlPagamento">
+      <div class="indirizzo-fatturazione">
+        <h2>Indirizzo di fatturazione</h2>
+        <label for="nome2">Nome</label>
+        <input type="text" id="nome2" name="nome2" required>
+        <label for="cognome2">Cognome</label>
+        <input type="text" id="cognome2" name="cognome2" required>
+        <label for="indirizzo">Indirizzo</label>
+        <input type="text" id="indirizzo" name="indirizzo" required>
+        <label for="citta">Citt&agrave;</label>
+        <input type="text" id="citta" name="citta" required>
+        <label for="provincia">Provincia</label>
+        <input type="text" id="provincia" name="provincia" required>
+        <label for="cap">CAP</label>
+        <input type="text" id="cap" name="cap" required>
+        <label for="stato">Stato</label>
+        <input type="text" id="stato" name="stato" required>
+        <label for="telefono">Numero di telefono</label>
+        <input type="tel" id="telefono" name="telefono" required>
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="dettagli-pagamento">
+        <h2>Dettagli Pagamento</h2>
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required>
+        <label for="cognome">Cognome</label>
+        <input type="text" id="cognome" name="cognome" required>
+        <label for="numeroCarta">Numero carta</label>
+        <input type="text" id="numeroCarta" name="numeroCarta" pattern="\d{16}" maxlength="16" required>
+        <label for="scadenza">Data di scadenza</label>
+        <input type="month" id="scadenza" name="scadenza" v-model="scadenza" required>
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" required maxlength="3" pattern="\d{3}">
+      </div>
+      <div class="riepilogo-ordine">
+        <h2>Riepilogo ordine</h2>
+        <template v-if="storedDataList && storedDataList.length">
+          <div v-for="(item, index) in storedDataList" :key="index">
+            <p>Tipo biglietto: {{ item.Tipo }}</p>
+            <template v-if="item.Tipo === 'Tribuna Centrale'">
+              <p> Prezzo: {{prezziDataList[2]}} &euro;</p>
+            </template>
+            <template v-else-if="item.Tipo === 'Tribuna Destra'">
+              <p> Prezzo: {{prezziDataList[3]}} &euro;</p>
+            </template>
+            <template v-else-if="item.Tipo === 'Tribuna Sinistra'">
+              <p> Prezzo: {{prezziDataList[4]}} &euro;</p>
+            </template>
+            <template v-else-if="item.Tipo === 'Parterre' || item.Tipo === 'Pit'">
+              <p> Prezzo: {{ prezziDataList[0] }} &euro;</p>
+            </template>
+            <template v-else-if="item.Tipo === 'Parterre VIP' || item.Tipo === 'Pit GOLD'">
+              <p> Prezzo: {{prezziDataList[1]}} &euro;</p>
+            </template>
+            <template v-if="item.Posto > 0">
+              <p>Posto: {{ item.Posto }}</p>
+            </template>
+          </div>
+        </template>
+        <template v-else>
+          <p>Nessun biglietto trovato.</p>
+        </template>
+        <button type="submit" style="margin-left: 40%; margin-top: 20px" class="center-button">PAGA ORA</button>
+      </div>
     </form>
-  </main>
   <footer>
     <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
   </footer>

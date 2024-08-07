@@ -15,7 +15,7 @@ const routes = [
     {
         path: '/',
         name: 'Promozioni',
-        component: Promozioni,
+        component: HomeBiglietti,
     },
     {
         path: '/pagamento',

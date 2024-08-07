@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import axios from "axios";
 
 const router = useRouter();
+const scadenza = ref('');
 
 const parsedData = ref({
   Nome: '',
@@ -33,6 +34,15 @@ onMounted(() => {
 });
 
 const goToPromotion = async () => {
+
+  // Controllo della data di scadenza
+  const today = new Date();
+  const scadenzaData = new Date(scadenza.value + '-01'); // Formatta come YYYY-MM-01
+  if (scadenzaData < today) {
+    alert('La data di scadenza della carta di credito è scaduta.');
+    return; // Interrompe l'esecuzione se la data è scaduta
+  }
+
   try {
     console.log('Sending data:', {
       NomeEvento: parsedData.value.Nome,
@@ -79,7 +89,7 @@ const goToPromotion = async () => {
       </div>
     </div>
   </header>
-  <main class="main-pagamento">
+  <form class="main-pagamento" @submit.prevent="goToPromotion">
     <div class="indirizzo-fatturazione">
       <h2>Indirizzo di fatturazione</h2>
       <label for="nomeAzienda">Nome azienda</label>
@@ -108,11 +118,11 @@ const goToPromotion = async () => {
       <label for="numeroCarta">Numero carta</label>
       <input type="text" id="numeroCarta" name="numeroCarta" pattern="\d{16}" maxlength="16" required>
       <label for="scadenza">Data di scadenza</label>
-      <input type="month" id="scadenza" name="scadenza" required>
+      <input type="month" id="scadenza" name="scadenza" v-model="scadenza"  required>
       <label for="cvv">CVV</label>
       <input type="text" id="cvv" name="cvv" required maxlength="3" pattern="\d{3}" >
     </div>
-    <form class="riepilogo-ordine">
+    <div class="riepilogo-ordine">
       <h2>Riepilogo ordine</h2>
       <!--Inserire i dati del riepilogo ordine ricevuti dal backend-->
       <p>Nome evento: {{  parsedData.Nome }}</p>
@@ -120,10 +130,11 @@ const goToPromotion = async () => {
       <p>Data Inizio evento: {{  parsedData.Data }}</p>
       <p>Numero di giornate: {{  parsedData.Giorni }}</p>
       <p>Tipologia promozione: {{ promo }}</p>
+      <button type="submit" style="margin-left: 40%; margin-top: 20px" class="center-button">PAGA ORA</button>
 
-      <button class="center-button" @click="goToPromotion()">PAGA ORA </button>
-    </form>
-  </main>
+    </div>
+
+  </form>
 
   <footer>
     <h5 class="nome"> &copy; EventiDivertenti</h5>

@@ -143,6 +143,20 @@ const getTribunaStyle = (tribuna) => {
 
 const vaiAlPagamento = async () => {
   try {
+
+    const numSelezionati = postiSelezionati.value.length + count.value;
+
+    if (numSelezionati === 0) {
+      alert('Seleziona almeno un posto!');
+      return;
+    } else if (numSelezionati > 6) {
+      alert('Seleziona al massimo 6 posti!');
+      return;
+    } else if (count.value > 0 && selezioneTribuna.value === '') {
+      alert('Seleziona una categoria di posti!');
+      return;
+    }
+
     const response = await axios.post('http://localhost:8080/ticket/gotoPagamento', {
       tribuna: selezioneTribuna.value,
       postiSelezionati: postiSelezionati.value,

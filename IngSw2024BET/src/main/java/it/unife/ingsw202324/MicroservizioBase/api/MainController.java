@@ -29,14 +29,14 @@ public class MainController {
     @Autowired
     SponsorizzazioneService sponsorizzazioneService;
 
-    @CrossOrigin(origins = "http://localhost:5174") // Aggiungi questa linea
+    @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
     @GetMapping("/getEventiOrganizzatore")
     public List<String> getEventiOrganizzatore() {
         String ID_Organizzatore = TemplateRestConsumer.getIdOrg("organizzatore", null, true);
         return myService.getEventiOrganizzatore(ID_Organizzatore);
     }
 
-    @CrossOrigin(origins = "http://localhost:5174") // Aggiungi questa linea
+    @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
     @PostMapping("/getInfoPromo")
     public ResponseEntity<Map<String, Object>> infoPromo(@RequestBody Map<String, Object> request) {
         // Estrai i dati dal map
@@ -105,7 +105,7 @@ public class MainController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:5174")
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/processPromoOrder")
     public ResponseEntity<Map<String, Object>> processPromoOrder(@RequestBody Map<String, Object> request) {
 
