@@ -19,65 +19,66 @@ import static org.mockito.Mockito.*;
 public class TicketControllerTest {
 
     @Mock
-    private ServiceTicket ticketService;
+    private ServiceTicket ticketService;  // Servizio per la gestione dei biglietti
 
     @Mock
-    private EventoService eventoService;
+    private EventoService eventoService;  // Servizio per la gestione degli eventi
 
     @Mock
-    private LuogoService luogoService;
+    private LuogoService luogoService;    // Servizio per la gestione dei luoghi
 
     @Mock
-    private ServiceTransazioni transazioniService;
+    private ServiceTransazioni transazioniService;  // Servizio per la gestione delle transazioni
 
     @InjectMocks
-    private TicketController ticketController;
+    private TicketController ticketController;  // Controller da testare
 
     @BeforeEach
     void setUp() {
+        // Inizializza i mock e le dipendenze iniettate
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
     void testGetInfoBiglietti() {
+        // Informazioni sul test
         System.out.println("TestGetInfoBiglietti - Start");
-        System.out.println("Test di verifica del metodo getInfoBiglietti() del controller TicketController" +
-                " che restituisce le informazioni sui posti gia occupati per un evento" +
-                " in modo tale da poter visualizzare nella pagina di acquisto i posti disponibili e quelli gia occupati.");
+        System.out.println("Verifica del metodo getInfoBiglietti() per ottenere le informazioni sui posti occupati.");
 
+        // Prepara i dati simulati
         TicketData mockTicketData = new TicketData();
         mockTicketData.setEvento(new Evento());
         mockTicketData.setLuogo(new Luogo());
         mockTicketData.setBiglietti(List.of());
         mockTicketData.setPrezzi(List.of());
 
+        // Configura il comportamento simulato del servizio ticketService
         when(ticketService.getPostiByIdEvento(anyString())).thenReturn(List.of());
 
+        // Chiama il metodo del controller
         TicketData result = ticketController.getInfoBiglietti();
 
+        // Verifica il risultato
         System.out.println("TestGetInfoBiglietti - Risultato: " + result);
         assertNotNull(result);
-        verify(ticketService).getPostiByIdEvento(anyString());
+        verify(ticketService).getPostiByIdEvento(anyString());  // Verifica che il metodo del servizio sia stato chiamato
     }
 
     @Test
     void testPay() {
+        // Informazioni sul test
         System.out.println("TestPay - Start");
-        System.out.println("Test di verifica del metodo pay() del controller TicketController" +
-                " che permette di effettuare il pagamento di uno o piu biglietti per un evento"+
-                " , di inserire la transazione nel database e i biglietti acquistati con tutte le specifiche."
-                + " Inoltre, il metodo restituisce un messaggio di conferma del pagamento che sara utilizzato anche dal gruppo che gestisce le notifiche.");
+        System.out.println("Verifica del metodo pay() per effettuare il pagamento di biglietti e inserire la transazione.");
 
-
-        // Mock the behavior of ticketService.addElement
+        // Dati simulati per Biglietto
         Biglietto mockBiglietto = new Biglietto();
         mockBiglietto.setPrezzo(90L);
-        when(ticketService.addElement(any(Biglietto.class))).thenReturn(mockBiglietto);
 
-        // Mock the behavior of transazioniService.insert
+        // Configura il comportamento simulato dei servizi
+        when(ticketService.addElement(any(Biglietto.class))).thenReturn(mockBiglietto);
         doNothing().when(transazioniService).insert(any(Transazioni.class));
 
-        // Create a sample request
+        // Crea una richiesta di esempio
         Map<String, Object> request = Map.of(
                 "utente", "user1",
                 "evento", "event1",
@@ -87,42 +88,40 @@ public class TicketControllerTest {
                 ))
         );
 
-        // Call the controller method
+        // Chiama il metodo del controller
         ResponseEntity<Map<String, Object>> response = ticketController.pay(request);
 
+        // Verifica il risultato
         System.out.println("TestPay - Response: " + response);
         System.out.println("TestPay - Response Body: " + response.getBody());
 
-        // Verify that the response status is 200 OK
         assertNotNull(response);
-        assertEquals(200, response.getStatusCodeValue());
-
-        // Verify that the ticketService.addElement was called with the expected Biglietto
-        verify(ticketService).addElement(any(Biglietto.class));
-
-        // Verify that the transazioniService.insert was called
-        verify(transazioniService).insert(any(Transazioni.class));
+        assertEquals(200, response.getStatusCodeValue());  // Verifica che lo stato della risposta sia 200 OK
+        verify(ticketService).addElement(any(Biglietto.class));  // Verifica che il metodo addElement sia stato chiamato
+        verify(transazioniService).insert(any(Transazioni.class));  // Verifica che il metodo insert sia stato chiamato
     }
 
     @Test
     void testBookSeats() {
+        // Informazioni sul test
         System.out.println("TestBookSeats - Start");
-        System.out.println("Test di verifica del metodo bookSeats() del controller TicketController" +
-                " che permette di prenotare uno o piu posti per un evento, di inserire la prenotazione nel database e i posti prenotati con tutte le specifiche e mandare la rielaborazione dei biglietti al frontend per la visualizzazione in modo coerente."
-                + " Inoltre, il metodo restituisce un messaggio di conferma della prenotazione che sara utilizzato anche dal gruppo che gestisce le notifiche.");
+        System.out.println("Verifica del metodo bookSeats() per prenotare posti e restituire un messaggio di conferma.");
 
+        // Crea una richiesta di esempio
         Map<String, Object> request = Map.of(
                 "tribuna", "Tribuna Sinistra",
                 "postiSelezionati", List.of(1, 2, 3),
                 "count", 2
         );
 
+        // Chiama il metodo del controller
         ResponseEntity<Map<String, Object>> response = ticketController.bookSeats(request);
 
+        // Verifica il risultato
         System.out.println("TestBookSeats - Response: " + response);
         System.out.println("TestBookSeats - Response Body: " + response.getBody());
 
         assertNotNull(response);
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCodeValue());  // Verifica che lo stato della risposta sia 200 OK
     }
 }

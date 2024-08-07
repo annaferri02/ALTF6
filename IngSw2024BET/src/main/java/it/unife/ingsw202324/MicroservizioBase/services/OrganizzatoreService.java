@@ -1,8 +1,6 @@
 package it.unife.ingsw202324.MicroservizioBase.services;
 
-import it.unife.ingsw202324.MicroservizioBase.models.MyValues;
 import it.unife.ingsw202324.MicroservizioBase.models.Organizzatore;
-import it.unife.ingsw202324.MicroservizioBase.repositories.MyRepository;
 import it.unife.ingsw202324.MicroservizioBase.repositories.OrganizzatoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +24,7 @@ public class OrganizzatoreService {
         myRepository.save(record);
     }
 
+    /* Metodo che effettua una select sulla tabella Mysql per ID */
     public List<String> getEventiOrganizzatore(String ID_Organizzatore) {
         return myRepository.findEventiOrganizzatore(ID_Organizzatore);
     }

@@ -25,61 +25,59 @@ public class TemplateRestConsumerTest {
     private final RestTemplate restTemplate = mock(RestTemplate.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    // Utilizza un metodo di supporto per simulare una risposta JSON generica
+    // Metodo di supporto per creare risposte JSON simulate
     private String mockJsonResponse(String key, String value) {
         return String.format("{ \"%s\": \"%s\" }", key, value);
     }
 
     @Test
     void testGetIdOrg() {
+        // Informazioni sul test
         System.out.println("TestGetIdOrg - Start");
-        System.out.println("Test di verifica del metodo getIdOrg() del servizio TemplateRestConsumer" +
-                " che restituisce l'ID di un organizzatore.");
-        // Testa la logica del metodo getIdOrg senza chiamare REST
+        System.out.println("Verifica del metodo getIdOrg() per ottenere l'ID dell'organizzatore.");
+
+        // Test del metodo getIdOrg senza chiamate reali a REST
         String resourceName = "organizzatore";
         String uriBase = "http://localhost:3000/api/";
         String id = TemplateRestConsumer.getIdOrg(resourceName, uriBase, true);
+
+        // Verifica del risultato
         assertEquals("O0001", id);
     }
 
     @Test
     void testGetEventoMock() {
+        // Informazioni sul test
         System.out.println("TestGetEventoMock - Start");
-        System.out.println("Test di verifica del metodo getEventoMock() del servizio TemplateRestConsumer" +
-                " che restituisce un evento specifico.");
+        System.out.println("Verifica del metodo getEventoMock() per ottenere un evento specifico.");
 
-        // Prepara la risposta simulata
+        // Prepara la risposta simulata per l'evento
         String jsonResponse = mockJsonResponse("evento", "{\"id\": \"123\", \"nome\": \"Evento Test\"}");
         String resourceName = "evento";
         String uriBase = "http://localhost:3000/api/";
         when(restTemplate.getForObject(uriBase + resourceName, String.class)).thenReturn(jsonResponse);
 
-        // Chiama il metodo
+        // Chiama il metodo e verifica il risultato
         Evento evento = TemplateRestConsumer.getEventoMock(resourceName, uriBase, true);
-
-        // Verifica il risultato
         assertNotNull(evento);
         assertEquals("E0001", evento.getID_Evento());
         assertEquals("Concerto Live", evento.getNome());
-
     }
 
     @Test
     void testGetLuogoMock() {
+        // Informazioni sul test
         System.out.println("TestGetLuogoMock - Start");
-        System.out.println("Test di verifica del metodo getLuogoMock() del servizio TemplateRestConsumer" +
-                " che restituisce un luogo specifico per un evento.");
+        System.out.println("Verifica del metodo getLuogoMock() per ottenere un luogo specifico.");
 
-        // Prepara la risposta simulata
+        // Prepara la risposta simulata per il luogo
         String jsonResponse = mockJsonResponse("luogo", "{\"id\": \"456\", \"nome\": \"Luogo Test\"}");
         String resourceName = "luogo";
         String uriBase = "http://localhost:3000/api/";
         when(restTemplate.getForObject(uriBase + resourceName, String.class)).thenReturn(jsonResponse);
 
-        // Chiama il metodo
+        // Chiama il metodo e verifica il risultato
         Luogo luogo = TemplateRestConsumer.getLuogoMock(resourceName, uriBase, true);
-
-        // Verifica il risultato
         assertNotNull(luogo);
         assertEquals("L00001", luogo.getIdLuogo());
         assertEquals("Teatro Nuovo", luogo.getNome());
@@ -87,21 +85,18 @@ public class TemplateRestConsumerTest {
 
     @Test
     void testGetPricesMock() {
+        // Informazioni sul test
         System.out.println("TestGetPricesMock - Start");
-        System.out.println("Test di verifica del metodo getPricesMock() del servizio TemplateRestConsumer" +
-                " che restituisce una lista di prezzi per un evento specifico.");
+        System.out.println("Verifica del metodo getPricesMock() per ottenere una lista di prezzi.");
 
-
-        // Prepara la risposta simulata
+        // Prepara la risposta simulata per i prezzi
         String jsonResponse = "[\"40\", \"90\", \"60\", \"80\", \"80\"]";
         String resourceName = "prices";
         String uriBase = "http://localhost:3000/api/";
         when(restTemplate.getForObject(uriBase + resourceName, String.class)).thenReturn(jsonResponse);
 
-        // Chiama il metodo
+        // Chiama il metodo e verifica il risultato
         List<String> prices = TemplateRestConsumer.getPricesMock(resourceName, uriBase, true);
-
-        // Verifica il risultato
         assertNotNull(prices);
         assertEquals(5, prices.size());
         assertTrue(prices.contains("40"));

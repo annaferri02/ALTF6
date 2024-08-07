@@ -15,6 +15,7 @@ public class SponsorizzazioneService {
     @Autowired
     private SponsorizzazioneRepository myRepository;
 
+    // Metodo per inserire una sponsorizzazione nel db
     public void insert(Sponsorizzazione record){
         myRepository.save(record);
     }

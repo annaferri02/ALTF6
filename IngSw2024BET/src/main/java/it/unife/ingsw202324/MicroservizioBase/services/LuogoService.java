@@ -16,6 +16,7 @@ public class LuogoService {
     private LuogoRepository myRepository;
 
 
+    // metodo per ottenere il luogo da id
     public Luogo getLuogoById(String idLuogo) {
         return myRepository.getLuogoById(idLuogo);
     }

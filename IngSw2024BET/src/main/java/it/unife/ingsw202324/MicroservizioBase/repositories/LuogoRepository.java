@@ -11,6 +11,7 @@ import java.util.List;
 /* Classe che definisce il repository (database)  */
 public interface LuogoRepository extends JpaRepository<Biglietto, Long> {
 
+    //Query per trovare il luogo da un id
     @Query("SELECT Luogo FROM Luogo l WHERE l.idLuogo = :idLuogo")
     Luogo getLuogoById(@Param("idLuogo") String idLuogo);
 

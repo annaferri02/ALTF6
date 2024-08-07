@@ -34,10 +34,12 @@ public class ServiceTicket {
         return record;
     }
 
+    /* Metodo che recupera i dati da un db H2 (in assenza di mysql) */
     public String callRest() {
         return TemplateRestConsumer.callREST("new", null, true);
     }
 
+    // Metodo che recupera i posti occupati per un evento
     public List<String> getPostiByIdEvento(String idEvento) {
         return myRepository.findPostiByIdEvento(idEvento);
     }

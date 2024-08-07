@@ -16,14 +16,17 @@ public class EventoService {
     @Autowired
     private EventoRepository myRepository;
 
+    // metodo per ottenere la data di un evento
     public Date getDataEvento(String Nome) {
         return myRepository.getDataEvento(Nome);
     }
 
+    // metodo per ottenere l'id di un evento
     public String getIDEvento(String Nome) {
         return myRepository.getIDEvento(Nome);
     }
 
+    // metodo per ottenere l'evento dall'id
     public Evento getEventoByID(String ID_Evento) {
         return myRepository.getEventoByID(ID_Evento);
     }

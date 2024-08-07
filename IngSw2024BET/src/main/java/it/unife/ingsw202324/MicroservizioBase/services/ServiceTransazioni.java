@@ -1,18 +1,13 @@
 package it.unife.ingsw202324.MicroservizioBase.services;
 
-import it.unife.ingsw202324.MicroservizioBase.models.Biglietto;
-import it.unife.ingsw202324.MicroservizioBase.models.MyValues;
 import it.unife.ingsw202324.MicroservizioBase.models.Transazioni;
 import it.unife.ingsw202324.MicroservizioBase.models.Utente;
-import it.unife.ingsw202324.MicroservizioBase.repositories.MyRepository;
 import it.unife.ingsw202324.MicroservizioBase.repositories.TransazioniRepository;
 import it.unife.ingsw202324.MicroservizioBase.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static java.lang.System.exit;
 
 /* Service class per interrogare il db  */
 @Service
