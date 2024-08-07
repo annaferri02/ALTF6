@@ -58,15 +58,17 @@ const vaiAlPagamento = async (event: Event) => {
     </div>
     <div class="right-section">
       <div class="login">
-        <a href="login.html">Login</a>
+        <a style="color: darkgreen; font-weight: bolder" href="login.html">Login</a>
       </div>
       <div class="register">
-        <a href="register.html">Registrazione</a>
+        <a style="color: darkgreen; font-weight: bolder" href="register.html">Registrazione</a>
       </div>
-      <button class="center-button">Menù</button>
+      <div class="menu">
+        <a style="color: darkgreen; font-weight: bolder" href="menu.html">Menù</a>
+      </div>
     </div>
   </header>
-  <main class="main">
+  <main class="main-pagamento">
     <div class="indirizzo-fatturazione">
       <h2>Indirizzo di fatturazione</h2>
       <label for="nome2">Nome</label>
@@ -89,7 +91,6 @@ const vaiAlPagamento = async (event: Event) => {
       <input type="email" id="email" name="email" required>
     </div>
     <div class="dettagli-pagamento">
-      <h2>Dettagli Pagamento</h2>
       <h2>Dettagli Pagamento</h2>
       <label for="nome">Nome</label>
       <input type="text" id="nome" name="nome" required>

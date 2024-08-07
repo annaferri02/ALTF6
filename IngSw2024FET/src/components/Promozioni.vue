@@ -18,68 +18,95 @@ const goToPromotion = (promoPage: string) => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="login">
-        <a href="login.html">Login</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
+      </div>
+      <div class="homepage">
+        <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
       <div class="register">
-        <a href="register.html">Registrazione</a>
+        <a class="hover-enlarge" href="register.html">Registrazione</a>
       </div>
-      <button class="buttonM">Menù</button>
+      <div class="logout">
+        <a class="hover-enlarge" href="logout.html">Logout</a>
+      </div>
     </div>
   </header>
   <main>
     <div class="promotion_section">
-      <h2>Vuoi aumentare la visibilità del tuo evento?</h2>
-      <p>Dai un'occhiata ai pacchetti disponibili "Promuovi ora", grazie ai quali <br> renderai il tuo evento più visibile aumentando il numero di partecipazioni!</p>
+      <h1>Vuoi aumentare la visibilità del tuo evento?</h1>
+      <h3 style="font-weight: normal">Dai un'occhiata ai pacchetti disponibili "Promuovi ora", grazie ai quali <br> renderai il tuo evento più visibile aumentando il numero di partecipazioni!</h3>
+      <div class="freccia"></div>
       <h2>Scegli la soluzione "Promuovi Ora" che preferisci</h2>
+      <h3 style="font-weight: normal"> Cliccando sulle promozioni potrai accedere ai dettagli e scegliere se applicare la promozione al tuo evento </h3>
       <div class="container">
         <div class="promo_banner" @click="goToPromotion('Promo1')">
           <h3>Rimetti in rilievo</h3>
           <img src="@/assets/primo.gif">
-          <p>Riposiziona l’evento in prima pagina, come appena pubblicato.</p>
-          <p>A PARTIRE DA 0,80€</p>
+          <p style="font-style: italic">Riposiziona l’evento in prima pagina, come appena pubblicato.</p>
+          <p><strong>A PARTIRE DA 0,80€</strong></p>
         </div>
         <div class="promo_banner" @click="goToPromotion('Promo2')">
           <h3>Metti in esposizione</h3>
           <img src="@/assets/secondo.gif">
-          <p>Etichetta l’evento come in “Esposizione”, facendolo apparire tra i primi risultati della ricerca.</p>
-          <p>A PARTIRE DA 0,50€</p>
+          <p style="font-style: italic">Etichetta l’evento come in “Esposizione”, facendolo apparire tra i primi risultati della ricerca.</p>
+          <p><strong>A PARTIRE DA 0,50€</strong></p>
         </div>
         <div class="promo_banner" @click="goToPromotion('Promo3')">
           <h3>Pungente</h3>
           <img src="@/assets/terzo.gif">
-          <p>Etichetta l’evento come “Pungente” e attira più partecipazioni.</p>
-          <p>A PARTIRE DA 0,65€</p>
+          <p style="font-style: italic">Etichetta l’evento come “Pungente” e attira più partecipazioni.</p>
+          <p><strong>A PARTIRE DA 0,65€</strong></p>
         </div>
         <div class="promo_banner" @click="goToPromotion('Promo4')">
           <h3>Promo 2 x 1</h3>
           <img src="@/assets/quarto.gif">
-          <p>Combina le opzioni in rilievo e in esposizione ad un prezzo vantaggioso.</p>
-          <p>A PARTIRE DA 1,20€</p>
+          <p style="font-style: italic">Combina le opzioni in rilievo e in esposizione ad un prezzo vantaggioso.</p>
+          <p><strong>A PARTIRE DA 1,20€</strong></p>
         </div>
       </div>
-      <section class="benefits">
-        <h3>Perché scegliere le soluzioni 'Promuovi ora'?</h3>
-        <ul>
-          <li><strong>Arriva a più partecipanti possibili!</strong> Il tuo evento verrà messo in risalto e i contatti si moltiplicheranno.</li>
-          <li><strong>Vendi al prezzo che scegli tu!</strong> Valorizza il tuo evento e vendi i biglietti al prezzo che ritieni più opportuno.</li>
-          <li><strong>Raggiungi più persone nel minor tempo possibile!</strong> Più utenti vedranno il tuo evento e minor tempo ci impiegherà ad andare sold-out.</li>
-        </ul>
-      </section>
-      <button class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
-      <h4>Pagamenti sicuri assicurati!</h4>
-      <p>Scegli il metodo di pagamento che preferisci e rendi il tuo evento imperdibile.</p>
-      <div class="payment-methods">
-        <img src="@/assets/visa.png" alt="Visa"/>
-        <img src="@/assets/maestro.avif" alt="Maestro"/>
-        <img src="@/assets/paypal.png" alt="PayPal"/>
-        <img src="@/assets/mastercard.png" alt="MasterCard"/>
-        <img src="@/assets/postepay.png" alt="PostePay"/>
+      <br>
+      <div class="motivazioni">
+        <h2>Perché scegliere le soluzioni 'Promuovi ora'?</h2>
+
+            <h3 style="font-style: italic" ><strong>Arriva a più partecipanti possibili!</strong> </h3>
+            <h4 style="font-style: italic; font-weight: normal">Il tuo evento verrà messo in risalto e i contatti si moltiplicheranno.</h4>
+            <h3 style="font-style: italic" ><strong>Vendi al prezzo che scegli tu!</strong></h3>
+            <h4 style="font-style: italic; font-weight: normal">Valorizza il tuo evento e vendi i biglietti al prezzo che ritieni più opportuno. </h4>
+            <h3 style="font-style: italic" ><strong>Raggiungi più persone nel minor tempo possibile!</strong></h3>
+            <h4 style="font-style: italic; font-weight: normal">Più utenti vedranno il tuo evento e minor tempo ci impiegherà ad andare sold-out. </h4>
+        <button class="center-button" @click="goToPromotion('Pagamento_promo')">PROMUOVI ORA</button>
       </div>
+      <br>
+      <h2>Pagamenti sicuri assicurati!</h2>
+      <h3 style="font-weight: normal">Scegli il metodo di pagamento che preferisci e rendi il tuo evento imperdibile.</h3>
+      <div class="payment-methods">
+        <img style="width: 100px; border-radius: 50%; height: 100px" src="@/assets/visa1.png" alt="Visa"/>
+        <img style="width: 100px; border-radius: 50%; height: 100px" src="@/assets/maestro1.png" alt="Maestro"/>
+        <img style="width: 100px; border-radius: 50%; height: 100px" src="@/assets/paypal1.png" alt="PayPal"/>
+        <img style="width: 100px; border-radius: 50%; height: 100px" src="@/assets/mastercard1.jpg" alt="MasterCard"/>
+        <img style="width: 100px; border-radius: 50%; height: 100px" src="@/assets/postepay.png" alt="PostePay"/>
+      </div>
+      <br>
     </div>
   </main>
+  <hr class="separator-line">
   <footer>
-    <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
+    <h5 class="nome"> &copy; EventiDivertenti</h5>
+    <div class="center-section">
+    <div class="termini">
+      <a class="hover-enlarge" href="termini.html">Terms & Conditions</a>
+    </div>
+    <div class="help">
+      <a class="hover-enlarge" href="help.html">HELP</a>
+    </div>
+    <div class="contattaci">
+      <a class="hover-enlarge" href="contatti.html">Contattaci</a>
+    </div>
+      <div class="privacy">
+        <a class="hover-enlarge" href="privacy.html">Privacy</a>
+      </div>
+    </div>
   </footer>
   </body>
 </template>

@@ -8,13 +8,14 @@ import Promo2 from '@/components/promo/Promo2.vue'; // Sostituisci con il percor
 import Promo3 from '@/components/promo/Promo3.vue'; // Sostituisci con il percorso corretto per Promo3.vue
 import Promo4 from '@/components/promo/Promo4.vue'; // Sostituisci con il percorso corretto per Promo4.vue
 import Pagamento_promo from "@/components/Pagamento_promo.vue";
+import Promozioni from "@/components/Promozioni.vue";
 import HomeBiglietti from "@/components/Biglietti.vue";
 
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: HomeBiglietti,
+        name: 'Promozioni',
+        component: Promozioni,
     },
     {
         path: '/pagamento',

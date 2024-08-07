@@ -171,12 +171,14 @@ const vaiAlPagamento = async () => {
     </div>
     <div class="right-section">
       <div class="login">
-        <a href="login.html">Login</a>
+        <a style="color: darkgreen; font-weight: bolder" href="login.html">Login</a>
       </div>
       <div class="register">
-        <a href="register.html">Registrazione</a>
+        <a style="color: darkgreen; font-weight: bolder" href="register.html">Registrazione</a>
       </div>
-      <button class="center-button">Menù</button>
+      <div class="menu">
+        <a style="color: darkgreen; font-weight: bolder" href="menu.html">Menù</a>
+      </div>
     </div>
   </header>
   <main>
@@ -287,7 +289,7 @@ const vaiAlPagamento = async () => {
   </main>
 
   <footer>
-    <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
+    <p style="color: darkgreen; font-weight: bolder" > ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
   </footer>
   </body>
 </template>

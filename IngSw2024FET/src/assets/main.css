@@ -1,5 +1,4 @@
 @import './base.css';
-/*@import './promo.css';*/
 @import './biglietti.css';
 @import './pagamento.css';
 
@@ -9,13 +8,20 @@
 }
 
 .right-section {
-  width: 70%;
+  width: 100%;
   display: flex;
   justify-content: right;
   align-items: center;
 }
 
-.login, .register{
+.center-section{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.logout, .register, .homepage, .areapersonale, .privacy, .contattaci, .help, .termini{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +43,6 @@
   opacity: 0.7;
 }
 
-/* PROMOZIONI */
 .promotion_section{
   justify-content: center;
   align-items: center;
@@ -48,6 +53,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5px;
 }
 
 .promo_banner{
@@ -61,19 +67,25 @@
 .promo_banner img{
   width: 200px;
   height: 100px;
+  border-radius: 5px;
 }
 
 .promo_banner:hover {
-  background-color: grey;
-  box-shadow: 5px 5px 3px black;
+  background-color: mediumorchid;
+  box-shadow: 4px 4px 10px black;
+  transform: scale(1.1);
 }
 
 .benefits{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: left;
+
 }
 
 .center-button {
-  background-color: #ffffff;
+  background-color: mediumorchid;
   border-color: black;
   border-width: 1px;
   height: 40px;
@@ -82,16 +94,111 @@
 }
 
 .center-button:hover {
-  background-color: grey;
+  background-color: mediumorchid;
+  transform: scale(1.1);
 }
 
 .payment-methods{
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 .payment-methods img {
   width: 10%;
   height: 10%;
+  box-shadow: 4px 4px 2px black;
+}
+
+
+.hover-enlarge {
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  font-size: large;
+}
+
+.nome{
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  font-size: large;
+}
+
+.hover-enlarge:hover {
+  transform: scale(1.1);
+  color: mediumorchid;
+}
+
+.separator-line {
+  width: 100%;
+  border: 0;
+  height: 3px;
+  margin: 20px 0;
+
+  background: linear-gradient(
+            to right,
+            transparent,
+            mediumorchid,
+            transparent
+  );
+}
+
+.motivazioni {
+  background: linear-gradient(
+          to bottom,
+          transparent,
+          transparent
+  ), linear-gradient(
+          to right,
+          transparent,
+          lightskyblue,
+          transparent
+  );
+  background-blend-mode: multiply;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.freccia {
+  width: 100%;
+  height: 70px; /* Regola l'altezza in base alle tue necessità */
+  position: relative;
+}
+
+.freccia::before,
+.freccia::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 50%;
+  height: 2px; /* Spessore della linea */
+  box-shadow: 7px 2px 9px mediumpurple;
+  color: mediumorchid;
+
+}
+
+.freccia::before {
+  left: 0;
+  transform: translateY(-50%) rotate(5deg); /* Angolo per puntare verso il basso */
+  transform-origin: right;
+  background: linear-gradient(
+          to right,
+          transparent,
+          mediumorchid 100%,
+          transparent
+  );
+}
+
+.freccia::after {
+  right: 0;
+  transform: translateY(-50%) rotate(-5deg); /* Angolo per puntare verso il basso */
+  transform-origin: left;
+  background: linear-gradient(
+          to left,
+          transparent,
+          mediumorchid 100%,
+          transparent
+  );
 }

@@ -38,7 +38,7 @@ public class TicketController {
     }
 
 
-  @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
+  @CrossOrigin(origins = "http://localhost:5174") // Aggiungi questa linea
   @GetMapping("/getInfoBiglietti")
   public TicketData getInfoBiglietti() {
       TicketData ticketData = new TicketData();
@@ -56,7 +56,7 @@ public class TicketController {
 
 
 
-    @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
+    @CrossOrigin(origins = "http://localhost:5174") // Aggiungi questa linea
     @PostMapping("/Pagamento")
     public ResponseEntity<Map<String, Object>> pay(@RequestBody Map<String, Object> request) {
         try {
@@ -136,7 +136,7 @@ public class TicketController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
+    @CrossOrigin(origins = "http://localhost:5174") // Aggiungi questa linea
     @PostMapping("/gotoPagamento")
     public ResponseEntity<Map<String, Object>> bookSeats(@RequestBody Map<String, Object> request) {
         // Estrai i dati dal map

@@ -65,17 +65,21 @@ const goToPromotion = async () => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="login">
-        <a href="login.html">Login</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
+      </div>
+      <div class="homepage">
+        <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
       <div class="register">
-        <a href="register.html">Registrazione</a>
+        <a class="hover-enlarge" href="register.html">Registrazione</a>
       </div>
-      <button class="center-button">Menù</button>
+      <div class="logout">
+        <a class="hover-enlarge" href="logout.html">Logout</a>
+      </div>
     </div>
   </header>
-  <main>
-
+  <main class="main-pagamento">
     <div class="indirizzo-fatturazione">
       <h2>Indirizzo di fatturazione</h2>
       <label for="nomeAzienda">Nome azienda</label>
@@ -108,6 +112,7 @@ const goToPromotion = async () => {
       <label for="cvv">CVV</label>
       <input type="text" id="cvv" name="cvv" required maxlength="3" pattern="\d{3}" >
     </div>
+    <form class="riepilogo-ordine">
       <h2>Riepilogo ordine</h2>
       <!--Inserire i dati del riepilogo ordine ricevuti dal backend-->
       <p>Nome evento: {{  parsedData.Nome }}</p>
@@ -117,12 +122,26 @@ const goToPromotion = async () => {
       <p>Tipologia promozione: {{ promo }}</p>
 
       <button class="center-button" @click="goToPromotion()">PAGA ORA </button>
+    </form>
   </main>
 
   <footer>
-    <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
+    <h5 class="nome"> &copy; EventiDivertenti</h5>
+    <div class="center-section">
+      <div class="termini">
+        <a class="hover-enlarge" href="termini.html">Terms & Conditions</a>
+      </div>
+      <div class="help">
+        <a class="hover-enlarge" href="help.html">HELP</a>
+      </div>
+      <div class="contattaci">
+        <a class="hover-enlarge" href="contatti.html">Contattaci</a>
+      </div>
+      <div class="privacy">
+        <a class="hover-enlarge" href="privacy.html">Privacy</a>
+      </div>
+    </div>
   </footer>
-
   </body>
 </template>
 
