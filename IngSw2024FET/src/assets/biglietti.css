@@ -142,7 +142,7 @@ select {
 .posto-occupato {
     background-color: red;
     color: white;
-    border: 2px solid darkred;
+    border: 2px solid red;
 }
 
 .posto-disponibile {
