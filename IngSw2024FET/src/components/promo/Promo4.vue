@@ -49,48 +49,59 @@ const goToPromotion = async (promoPage: string) => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="login">
-        <a href="login.html">Login</a>
+      <div class="homepage">
+        <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
-      <div class="register">
-        <a href="register.html">Registrazione</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
       </div>
-      <button class="center-button">Menù</button>
+      <div class="logout">
+        <a class="hover-enlarge" href="logout.html">Logout</a>
+      </div>
     </div>
   </header>
   <main>
     <article>
-      <h2>Vuoi massimizzare la visibilità del tuo evento e attirare un pubblico ancora più ampio?</h2>
-      <p>Con la nostra promozione "Promo 2 x 1", potrai combinare il potere della visibilità immediata e del posizionamento premium con la portata a lungo termine dell'ottimizzazione SEO. Come funziona:</p>
-      <ul>
-        <li><strong>Attivazione simultanea</strong>: Una volta attivata la promozione, il tuo evento verrà immediatamente posizionato in cima al feed degli eventi (Rimetti in Rilievo) e verrà avviato il processo di ottimizzazione SEO per migliorare il suo posizionamento nei risultati di ricerca (Metti in Esposizione).</li>
-        <li><strong>Durata personalizzabile</strong>: Puoi scegliere la durata totale della promozione, che si applicherà sia alla visibilità in cima al feed che all'ottimizzazione SEO.</li>
-        <li><strong>Risultati misurabili</strong>: Avrai accesso a un pannello di controllo per monitorare le performance della tua promozione, come il numero di visualizzazioni, i clic e il posizionamento nei risultati di ricerca.</li>
-      </ul>
+      <h1 class="centrato">Vuoi massimizzare la visibilità del tuo evento e attirare un pubblico ancora più ampio?</h1>
+      <h3  class="centrato" style="font-weight: normal">Con la nostra promozione "Promo 2 x 1", potrai combinare il potere della visibilità immediata e del posizionamento.</h3> <br>
+      <h4 class="centrato">Come funziona:</h4>
+      <h4 class="centrato" style="font-weight: inherit"> Una volta attivata la promozione, il tuo evento verrà immediatamente posizionato in cima al feed degli eventi (Rimetti in Rilievo) e verrà avviato il processo di ottimizzazione per migliorare il suo posizionamento nei risultati di ricerca (Metti in Esposizione).</h4>
+      <h4 class="centrato" style="font-weight: inherit">Pagherai una piccola quota al giorno per godere di questo vantaggio.</h4>
+      <h4 class="centrato" style="font-weight: inherit">Avrai accesso a un pannello di controllo per monitorare le performance della tua promozione, come il numero di visualizzazioni, i clic e il posizionamento nei risultati di ricerca, direttamente dalla tua area personale.</h4>
     </article>
-    <aside>
-      <h3>Dettagli Promozione</h3>
-      <p>Costo giornaliero: 1.20€</p>
-      <p>Durata minima: 7 giorni</p>
-      <p>Durata: fino all'inzio dell'evento</p>
-      <p>Posizionamento:</p>
-      <ul>
-          <li><strong>Rimetti in Rilievo</strong>: Prima posizione nel feed degli eventi</li>
-          <li><strong>Metti in Esposizione</strong>: Primi risultati delle ricerche pertinenti</li>
-      </ul>
 
-      <select v-model="selectedValue" class="eventi">
+    <aside class="centrato">
+      <h4>Dettagli Promozione</h4>
+      <p><strong>Costo giornaliero:</strong> 1.20€</p>
+      <p><strong>Durata:</strong> fino all'inzio dell'evento</p>
+      <p><strong>Posizionamento:</strong> Prime 3 posizioni nel feed e tra i risultati di ricerca</p>
+      <select style="border: lightgrey 1px solid; background-color: #fffdf3; margin-right: 13%" v-model="selectedValue" class="eventi">
         <option value="">Seleziona Evento</option>
         <option v-for="item in data" :key="item.id" :value="item">
           {{ item }}
         </option>
       </select>
-
-      <button class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
+      <br> <br>
+      <button style="margin-top: 20px;" class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
     </aside>
   </main>
   <footer>
-    <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
+    <hr class="separator-line">
+    <h5 class="nome"> &copy; EventiDivertenti</h5>
+    <div class="center-section">
+      <div class="termini">
+        <a class="hover-enlarge" href="termini.html">Terms & Conditions</a>
+      </div>
+      <div class="help">
+        <a class="hover-enlarge" href="help.html">HELP</a>
+      </div>
+      <div class="contattaci">
+        <a class="hover-enlarge" href="contatti.html">Contattaci</a>
+      </div>
+      <div class="privacy">
+        <a class="hover-enlarge" href="privacy.html">Privacy</a>
+      </div>
+    </div>
   </footer>
   </body>
 </template>

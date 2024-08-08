@@ -42,7 +42,7 @@ const vaiAlPagamento = async (event: Event) => {
   const today = new Date();
   const scadenzaData = new Date(scadenza.value + '-01'); // Formatta come YYYY-MM-01
   if (scadenzaData < today) {
-    alert('La data di scadenza della carta di credito è scaduta.');
+    alert('La carta di credito risulta scaduta.');
     return; // Interrompe l'esecuzione se la data è scaduta
   }
 
@@ -71,14 +71,14 @@ const vaiAlPagamento = async (event: Event) => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="login">
-        <a style="color: darkgreen; font-weight: bolder" href="login.html">Login</a>
+      <div class="homepage">
+        <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
-      <div class="register">
-        <a style="color: darkgreen; font-weight: bolder" href="register.html">Registrazione</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
       </div>
-      <div class="menu">
-        <a style="color: darkgreen; font-weight: bolder" href="menu.html">Menù</a>
+      <div class="logout">
+        <a class="hover-enlarge" href="logout.html">Logout</a>
       </div>
     </div>
   </header>
@@ -118,27 +118,27 @@ const vaiAlPagamento = async (event: Event) => {
         <input type="text" id="cvv" name="cvv" required maxlength="3" pattern="\d{3}">
       </div>
       <div class="riepilogo-ordine">
-        <h2>Riepilogo ordine</h2>
-        <template v-if="storedDataList && storedDataList.length">
+        <h2 style="margin-bottom: 0">Riepilogo ordine</h2>
+        <template style="margin-left: 0" v-if="storedDataList && storedDataList.length">
           <div v-for="(item, index) in storedDataList" :key="index">
-            <p>Tipo biglietto: {{ item.Tipo }}</p>
+            <h4>Tipo biglietto: {{ item.Tipo }}</h4>
             <template v-if="item.Tipo === 'Tribuna Centrale'">
-              <p> Prezzo: {{prezziDataList[2]}} &euro;</p>
+              <h4> Prezzo: {{prezziDataList[2]}} &euro;</h4>
             </template>
             <template v-else-if="item.Tipo === 'Tribuna Destra'">
-              <p> Prezzo: {{prezziDataList[3]}} &euro;</p>
+              <h4> Prezzo: {{prezziDataList[3]}} &euro;</h4>
             </template>
             <template v-else-if="item.Tipo === 'Tribuna Sinistra'">
-              <p> Prezzo: {{prezziDataList[4]}} &euro;</p>
+              <h4> Prezzo: {{prezziDataList[4]}} &euro;</h4>
             </template>
             <template v-else-if="item.Tipo === 'Parterre' || item.Tipo === 'Pit'">
-              <p> Prezzo: {{ prezziDataList[0] }} &euro;</p>
+              <h4> Prezzo: {{ prezziDataList[0] }} &euro;</h4>
             </template>
             <template v-else-if="item.Tipo === 'Parterre VIP' || item.Tipo === 'Pit GOLD'">
-              <p> Prezzo: {{prezziDataList[1]}} &euro;</p>
+              <h4> Prezzo: {{prezziDataList[1]}} &euro;</h4>
             </template>
             <template v-if="item.Posto > 0">
-              <p>Posto: {{ item.Posto }}</p>
+              <h4>Posto: {{ item.Posto }}</h4>
             </template>
           </div>
         </template>
@@ -149,7 +149,22 @@ const vaiAlPagamento = async (event: Event) => {
       </div>
     </form>
   <footer>
-    <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
+    <hr class="separator-line">
+    <h5 class="nome"> &copy; EventiDivertenti</h5>
+    <div class="center-section">
+      <div class="termini">
+        <a class="hover-enlarge" href="termini.html">Terms & Conditions</a>
+      </div>
+      <div class="help">
+        <a class="hover-enlarge" href="help.html">HELP</a>
+      </div>
+      <div class="contattaci">
+        <a class="hover-enlarge" href="contatti.html">Contattaci</a>
+      </div>
+      <div class="privacy">
+        <a class="hover-enlarge" href="privacy.html">Privacy</a>
+      </div>
+    </div>
   </footer>
   </body>
 </template>

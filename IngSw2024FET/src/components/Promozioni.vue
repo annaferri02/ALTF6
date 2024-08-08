@@ -18,14 +18,11 @@ const goToPromotion = (promoPage: string) => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="areapersonale">
-        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
-      </div>
       <div class="homepage">
         <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
-      <div class="register">
-        <a class="hover-enlarge" href="register.html">Registrazione</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
       </div>
       <div class="logout">
         <a class="hover-enlarge" href="logout.html">Logout</a>
@@ -75,7 +72,6 @@ const goToPromotion = (promoPage: string) => {
             <h4 style="font-style: italic; font-weight: normal">Valorizza il tuo evento e vendi i biglietti al prezzo che ritieni più opportuno. </h4>
             <h3 style="font-style: italic" ><strong>Raggiungi più persone nel minor tempo possibile!</strong></h3>
             <h4 style="font-style: italic; font-weight: normal">Più utenti vedranno il tuo evento e minor tempo ci impiegherà ad andare sold-out. </h4>
-        <button class="center-button" @click="goToPromotion('Pagamento_promo')">PROMUOVI ORA</button>
       </div>
       <br>
       <h2>Pagamenti sicuri assicurati!</h2>
@@ -90,8 +86,8 @@ const goToPromotion = (promoPage: string) => {
       <br>
     </div>
   </main>
-  <hr class="separator-line">
   <footer>
+    <hr class="separator-line">
     <h5 class="nome"> &copy; EventiDivertenti</h5>
     <div class="center-section">
     <div class="termini">

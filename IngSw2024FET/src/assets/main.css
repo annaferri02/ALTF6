@@ -86,15 +86,15 @@
 
 .center-button {
   background-color: mediumorchid;
-  border-color: black;
-  border-width: 1px;
+  border-color: mediumorchid;
+  border-width: 2px;
   height: 40px;
   border-radius: 5px;
   width: fit-content;
 }
 
 .center-button:hover {
-  background-color: mediumorchid;
+  background-color: magenta;
   transform: scale(1.1);
 }
 

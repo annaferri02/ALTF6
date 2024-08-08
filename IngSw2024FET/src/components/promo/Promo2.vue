@@ -49,45 +49,59 @@ const goToPromotion = async (promoPage: string) => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="login">
-        <a href="login.html">Login</a>
+      <div class="homepage">
+        <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
-      <div class="register">
-        <a href="register.html">Registrazione</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
       </div>
-      <button class="center-button">Menù</button>
+      <div class="logout">
+        <a class="hover-enlarge" href="logout.html">Logout</a>
+      </div>
     </div>
   </header>
   <main>
     <article>
-      <h2>Vuoi che il tuo evento sia facilmente rintracciabile dagli utenti che cercano attivamente eventi simili al tuo?</h2>
-      <p>Con la promozione "Metti in Esposizione", il tuo evento apparirà tra i primi risultati delle ricerche pertinenti, aumentando significativamente la sua visibilità e attrattività. Come funziona:</p>
-      <ul>
-        <li><strong>Ottimizzazione SEO</strong>: Il tuo evento verrà ottimizzato con le parole chiave più rilevanti, migliorando il suo posizionamento nei risultati di ricerca interni alla piattaforma.</li>
-        <li><strong>Visibilità prolungata</strong>: Garantisce una visibilità prolungata nel tempo, aumentando le possibilità di raggiungere un pubblico più ampio.</li>
-        <li><strong>Targeting personalizzato</strong>: Potrai scegliere le parole chiave più adatte al tuo evento, assicurandoti di raggiungere un pubblico altamente interessato.</li>
-        <li><strong>Risultati misurabili</strong>: Monitora il numero di clic e le visualizzazioni del tuo evento per valutare l'efficacia della promozione.</li>
-      </ul>
+      <h1 class="centrato">Vuoi che il tuo evento sia facilmente rintracciabile dagli utenti che cercano attivamente eventi simili al tuo?</h1>
+      <h3 class="centrato" style="font-weight: normal">Con la promozione "Metti in Esposizione", il tuo evento apparirà tra i primi risultati delle ricerche pertinenti, aumentando significativamente la sua visibilità e attrattività.</h3> <br>
+        <h4 class="centrato">Come funziona:</h4>
+        <h4 class="centrato" style="font-weight: inherit"> Il tuo evento verrà ottimizzato con le parole chiave più rilevanti, migliorando il suo posizionamento nei risultati di ricerca interni alla piattaforma.</h4>
+        <h4 class="centrato" style="font-weight: inherit">Pagherai una piccola quota al giorno per godere di questo vantaggio.</h4>
+        <h4 class="centrato" style="font-weight: inherit">Monitora il numero di clic e le visualizzazioni del tuo evento per valutare l'efficacia della promozione, direttamente dalla tua area personale.</h4>
     </article>
-    <aside>
-      <h3>Dettagli Promozione</h3>
-      <p>Costo giornaliero: 0.50€</p>
-      <p>Durata minima: 14 giorni</p>
-      <p>Durata: fino all'inzio dell'evento</p>
-      <p>Posizionamento: Risultati ricerche -> prime 3 posizioni</p>
 
-      <select v-model="selectedValue" class="eventi">
+    <aside class="centrato">
+      <h4>Dettagli Promozione</h4>
+      <p><strong>Costo giornaliero:</strong> 0.50€</p>
+      <p><strong>Durata:</strong> fino all'inzio dell'evento</p>
+      <p><strong>Posizionamento:</strong> Prime 3 posizioni tra i risultati di ricerca</p>
+      <select style="border: lightgrey 1px solid; background-color: #fffdf3; margin-right: 13%" v-model="selectedValue" class="eventi">
         <option value="">Seleziona Evento</option>
         <option v-for="item in data" :key="item.id" :value="item">
           {{ item }}
         </option>
       </select>
-
-      <button class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
+      <br> <br>
+      <button style="margin-top: 20px;" class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
     </aside>
   </main>
   <footer>
-    <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
+    <hr class="separator-line">
+    <h5 class="nome"> &copy; EventiDivertenti</h5>
+    <div class="center-section">
+      <div class="termini">
+        <a class="hover-enlarge" href="termini.html">Terms & Conditions</a>
+      </div>
+      <div class="help">
+        <a class="hover-enlarge" href="help.html">HELP</a>
+      </div>
+      <div class="contattaci">
+        <a class="hover-enlarge" href="contatti.html">Contattaci</a>
+      </div>
+      <div class="privacy">
+        <a class="hover-enlarge" href="privacy.html">Privacy</a>
+      </div>
+    </div>
   </footer>
   </body>
 </template>

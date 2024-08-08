@@ -39,7 +39,7 @@ const goToPromotion = async () => {
   const today = new Date();
   const scadenzaData = new Date(scadenza.value + '-01'); // Formatta come YYYY-MM-01
   if (scadenzaData < today) {
-    alert('La data di scadenza della carta di credito è scaduta.');
+    alert('La carta di credito risulta scaduta.');
     return; // Interrompe l'esecuzione se la data è scaduta
   }
 
@@ -75,14 +75,11 @@ const goToPromotion = async () => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="areapersonale">
-        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
-      </div>
       <div class="homepage">
         <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
-      <div class="register">
-        <a class="hover-enlarge" href="register.html">Registrazione</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
       </div>
       <div class="logout">
         <a class="hover-enlarge" href="logout.html">Logout</a>
@@ -137,6 +134,7 @@ const goToPromotion = async () => {
   </form>
 
   <footer>
+    <hr class="separator-line">
     <h5 class="nome"> &copy; EventiDivertenti</h5>
     <div class="center-section">
       <div class="termini">

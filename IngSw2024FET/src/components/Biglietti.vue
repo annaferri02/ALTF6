@@ -184,31 +184,31 @@ const vaiAlPagamento = async () => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="login">
-        <a style="color: darkgreen; font-weight: bolder" href="login.html">Login</a>
+      <div class="homepage">
+        <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
-      <div class="register">
-        <a style="color: darkgreen; font-weight: bolder" href="register.html">Registrazione</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
       </div>
-      <div class="menu">
-        <a style="color: darkgreen; font-weight: bolder" href="menu.html">Menù</a>
+      <div class="logout">
+        <a class="hover-enlarge" href="logout.html">Logout</a>
       </div>
     </div>
   </header>
   <main>
     <h1 class="centrato">Seleziona il biglietto che preferisci!</h1>
-    <div>
+    <div class="main-posti">
       <div v-if="mostraPiantina">
         <h3 class="centrato">Seleziona i posti numerati che desideri acquistare direttamente dalla piantina e i posti in parterre dal men&ugrave; sottostante</h3>
 
-        <select class="tariffe">
+        <div class="tariffe">
           <option>Tariffe</option>
           <option>Parterre {{ prezzi[0] }} &euro;</option>
           <option>Parterre VIP {{ prezzi[1] }} &euro;</option>
           <option>Tribuna frontale {{ prezzi[2] }} &euro;</option>
           <option>Tribuna laterale destra {{ prezzi[3] }} &euro;</option>
           <option>Tribuna laterale sinistra {{ prezzi[4] }} &euro;</option>
-        </select>
+        </div>
 
         <section class="piantina">
           <table id="palco">
@@ -255,11 +255,11 @@ const vaiAlPagamento = async () => {
       </div>
       <div v-if="!mostraPiantina">
         <h3 class="centrato">Seleziona i posti in Pit e Pit Gold mostrati nella piantina, dal men&ugrave; sottostante</h3>
-        <select class="tariffe">
+        <div class="tariffe">
           <option>Tariffe</option>
           <option>Pit 50 &euro;</option>
           <option>Pit GOLD 100 &euro;</option>
-        </select>
+        </div>
         <section class="piantina1">
           <table id="palco1">
             <tr>
@@ -279,31 +279,44 @@ const vaiAlPagamento = async () => {
         </section>
       </div>
       <br><br>
-      <h3 style=" margin-left: 13%; margin-top: 40px">Seleziona la categoria di posti che desideri acquistare:</h3>
-
-      <select v-model="selezioneTribuna">
+      <div class="bottoni">
+      <h3>Seleziona la categoria di posti che desideri acquistare:</h3>
+      <select style=" margin-left : 0px; border: lightgrey 1px solid;" v-model="selezioneTribuna">
         <option value="" >Categoria</option>
         <option v-for="opzione in opzioniMenu" :key="opzione" :value="opzione">
           {{ opzione }}
         </option>
       </select>
-
-      <br>
-      <br>
       <div>
-        <h3 style="margin-left: 12%">Seleziona il numero di posti che desideri acquistare:</h3>
-        <label style="margin-left: 12%" for="numeroPosti">Numero di posti </label>
-        <button style="margin-left: 12%" class="button" @click="decrement">{{ "-" }}</button>
+        <h3 >Seleziona il numero di posti che desideri acquistare:</h3>
+        <label for="numeroPosti">Numero di posti </label>
+        <button class="button" @click="decrement">{{ "-" }}</button>
         <button class="numero">{{ count }}</button>
         <button class="button" @click="increment">{{ "+" }}</button>
         <br><br>
       </div>
-      <button style="margin-left: 40%; margin-top: 20px" @click="vaiAlPagamento" class="center-button">Procedi con l'acquisto</button>
+      </div>
+      <button @click="vaiAlPagamento" class="center-button">Procedi con l'acquisto</button>
     </div>
   </main>
 
   <footer>
-    <p style="color: darkgreen; font-weight: bolder" > ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
+    <hr class="separator-line">
+    <h5 class="nome"> &copy; EventiDivertenti</h5>
+    <div class="center-section">
+      <div class="termini">
+        <a class="hover-enlarge" href="termini.html">Terms & Conditions</a>
+      </div>
+      <div class="help">
+        <a class="hover-enlarge" href="help.html">HELP</a>
+      </div>
+      <div class="contattaci">
+        <a class="hover-enlarge" href="contatti.html">Contattaci</a>
+      </div>
+      <div class="privacy">
+        <a class="hover-enlarge" href="privacy.html">Privacy</a>
+      </div>
+    </div>
   </footer>
   </body>
 </template>

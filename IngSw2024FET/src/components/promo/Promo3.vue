@@ -48,45 +48,59 @@ const goToPromotion = async (promoPage: string) => {
       <img src="@/assets/Logo.svg" alt="Logo" width="200" height="100">
     </div>
     <div class="right-section">
-      <div class="login">
-        <a href="login.html">Login</a>
+      <div class="homepage">
+        <a class="hover-enlarge" href="homepage.html">Home</a>
       </div>
-      <div class="register">
-        <a href="register.html">Registrazione</a>
+      <div class="areapersonale">
+        <a class="hover-enlarge" href="areapersonale.html">Area Personale</a>
       </div>
-      <button class="center-button">Menù</button>
+      <div class="logout">
+        <a class="hover-enlarge" href="logout.html">Logout</a>
+      </div>
     </div>
   </header>
   <main>
     <article>
-      <h2>Vuoi dare al tuo evento un tocco di pepe e far parlare di sé?</h2>
-      <p>Con la promozione "Pungente", il tuo evento verrà etichettato come un must-have per chi cerca esperienze uniche e indimenticabili. Come funziona:</p>
-      <ul>
-        <li><strong>Etichetta dedicata</strong>: Il tuo evento verrà contrassegnato con un'etichetta "Pungente" ben visibile, attirando l'attenzione degli utenti più avventurosi e alla ricerca di novità.</li>
-        <li><strong>Promozione sui social</strong>: Il tuo evento verrà promosso sui nostri canali social con contenuti accattivanti e hashtag dedicati, raggiungendo un pubblico più ampio.</li>
-        <li><strong>Visibilità prioritaria</strong>: Il tuo evento sarà posizionato in una sezione dedicata agli eventi "Pungenti", aumentando la sua visibilità per gli utenti interessati a questo tipo di esperienze.</li>
-        <li><strong>Risultati misurabili</strong>: Monitora da vicino l'impatto della promozione grazie ai nostri strumenti di analisi e scopri quante persone sono state attratte dall'etichetta "Pungente".</li>
-      </ul>
+      <h1 class="centrato">Vuoi dare al tuo evento un tocco di pepe e far parlare di sé?</h1>
+      <h3 class="centrato" style="font-weight: normal">Con la promozione "Pungente", il tuo evento verrà etichettato come un must-have per chi cerca esperienze uniche e indimenticabili.</h3> <br>
+      <h4 class="centrato">Come funziona:</h4>
+      <h4 class="centrato" style="font-weight: inherit"> Il tuo evento verrà contrassegnato con un'etichetta "Pungente" ben visibile, attirando l'attenzione degli utenti più avventurosi e alla ricerca di novità.</h4>
+      <h4 class="centrato" style="font-weight: inherit">Pagherai una piccola quota al giorno per godere di questo vantaggio.</h4>
+      <h4 class="centrato" style="font-weight: inherit">Monitora da vicino l'impatto della promozione grazie ai nostri strumenti di analisi e scopri quante persone sono state attratte dall'etichetta "Pungente", direttamente dalla tua area personale.</h4>
     </article>
-    <aside>
-      <h3>Dettagli Promozione</h3>
-      <p>Costo giornaliero: 0.65€</p>
-      <p>Durata minima: 7 giorni</p>
-      <p>Durata: fino all'inzio dell'evento</p>
-      <p>Posizionamento: Sezione dedicata agli eventi "Pungenti" e promozione sui social</p>
 
-      <select v-model="selectedValue" class="eventi">
+    <aside class="centrato">
+      <h4>Dettagli Promozione</h4>
+      <p><strong>Costo giornaliero:</strong> 0.65€</p>
+      <p><strong>Durata:</strong> fino all'inzio dell'evento</p>
+      <p><strong>Posizionamento:</strong> Sezione dedicata agli eventi "Pungenti" e contrassegnati nel feed principale</p>
+      <select style="border: lightgrey 1px solid; background-color: #fffdf3; margin-right: 13%" v-model="selectedValue" class="eventi">
         <option value="">Seleziona Evento</option>
         <option v-for="item in data" :key="item.id" :value="item">
           {{ item }}
         </option>
       </select>
-
-      <button class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
+      <br> <br>
+      <button style="margin-top: 20px;" class="center-button" @click="goToPromotion('Pagamento_promo')">AUMENTA LA VISIBILITÀ DEL TUO EVENTO</button>
     </aside>
   </main>
   <footer>
-    <p>ALT + F6 - altf6@events.com - +39 3840957702 - www.events.it</p>
+    <hr class="separator-line">
+    <h5 class="nome"> &copy; EventiDivertenti</h5>
+    <div class="center-section">
+      <div class="termini">
+        <a class="hover-enlarge" href="termini.html">Terms & Conditions</a>
+      </div>
+      <div class="help">
+        <a class="hover-enlarge" href="help.html">HELP</a>
+      </div>
+      <div class="contattaci">
+        <a class="hover-enlarge" href="contatti.html">Contattaci</a>
+      </div>
+      <div class="privacy">
+        <a class="hover-enlarge" href="privacy.html">Privacy</a>
+      </div>
+    </div>
   </footer>
   </body>
 </template>
