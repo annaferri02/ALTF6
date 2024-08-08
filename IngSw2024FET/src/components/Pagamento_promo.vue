@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import axios from "axios";
+import { ref, onMounted } from 'vue'; // Importa funzioni Vue per la reattività e il montaggio del componente
+import { useRouter } from 'vue-router'; // Importa useRouter per gestire la navigazione
+import axios from "axios"; // Importa axios per le richieste HTTP
 
-const router = useRouter();
-const scadenza = ref('');
+const router = useRouter(); // Ottiene l'istanza del router per la navigazione
+const scadenza = ref(''); // Variabile reattiva per memorizzare la data di scadenza della carta di credito
 
+// Variabile reattiva per memorizzare i dettagli dell'evento promozionale
 const parsedData = ref({
   Nome: '',
   Prezzo: '',
@@ -13,57 +14,67 @@ const parsedData = ref({
   Giorni: ''
 });
 
-const promo = ref('');
+const promo = ref(''); // Variabile reattiva per memorizzare il tipo di promozione
 
+// Funzione eseguita quando il componente viene montato
 onMounted(() => {
-  // Recupera i dati salvati nel localStorage
+  // Recupera il tipo di promozione dal localStorage
   const tipoPromozione = localStorage.getItem('promo');
+  // Recupera i dati dell'evento promozionale dal localStorage
   const storedData = localStorage.getItem('infoPromo');
-  console.log('Raw stored data:', storedData);
+  console.log('Raw stored data:', storedData); // Mostra i dati grezzi nel console log
 
   if (storedData) {
     try {
+      // Parsea i dati JSON salvati nel localStorage
       const data = JSON.parse(storedData);
-      parsedData.value = data; // Assicurati che data abbia la struttura prevista
+      parsedData.value = data; // Assegna i dati parsati alla variabile reattiva
     } catch (error) {
+      // Gestisce eventuali errori di parsing
       console.error('Error parsing stored data:', error);
     }
   }
 
-  promo.value = tipoPromozione || 'Non disponibile'; // Imposta un valore predefinito se nessun tipo di promozione è trovato
+  // Imposta il valore di tipoPromozione o 'Non disponibile' se non è stato trovato
+  promo.value = tipoPromozione || 'Non disponibile';
 });
 
+// Funzione per gestire il processo di pagamento e navigare alla pagina di conferma
 const goToPromotion = async () => {
-
-  // Controllo della data di scadenza
+  // Controlla se la data di scadenza è passata
   const today = new Date();
-  const scadenzaData = new Date(scadenza.value + '-01'); // Formatta come YYYY-MM-01
+  const scadenzaData = new Date(scadenza.value + '-01'); // Crea una data a partire dal valore di scadenza
   if (scadenzaData < today) {
-    alert('La carta di credito risulta scaduta.');
+    alert('La carta di credito risulta scaduta.'); // Mostra un messaggio di errore
     return; // Interrompe l'esecuzione se la data è scaduta
   }
 
   try {
+    // Mostra i dati inviati nel console log
     console.log('Sending data:', {
       NomeEvento: parsedData.value.Nome,
       Prezzo: parsedData.value.Prezzo,
       TipologiaPromozione: promo.value
     });
 
+    // Invia una richiesta POST al server con i dettagli dell'ordine
     const response = await axios.post('http://localhost:8080/api/processPromoOrder', {
       NomeEvento: parsedData.value.Nome,
       Prezzo: parsedData.value.Prezzo,
       TipologiaPromozione: promo.value
     });
 
+    // Mostra la risposta del server nel console log
     console.log('Response:', response.data);
+    // Naviga alla pagina di conferma del pagamento
     router.push({ name: 'PagamentoEffettuato' });
   } catch (error) {
+    // Gestisce eventuali errori nella richiesta
     console.error('Error sending data:', error);
   }
 };
-
 </script>
+
 
 <template>
   <head>
@@ -123,7 +134,7 @@ const goToPromotion = async () => {
       <h2>Riepilogo ordine</h2>
       <!--Inserire i dati del riepilogo ordine ricevuti dal backend-->
       <p>Nome evento: {{  parsedData.Nome }}</p>
-      <p>Prezzo: {{  parsedData.Prezzo }}</p>
+      <p>Prezzo: {{  parsedData.Prezzo }} &euro;</p>
       <p>Data Inizio evento: {{  parsedData.Data }}</p>
       <p>Numero di giornate: {{  parsedData.Giorni }}</p>
       <p>Tipologia promozione: {{ promo }}</p>

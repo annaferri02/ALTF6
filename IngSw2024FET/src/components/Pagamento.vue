@@ -3,59 +3,75 @@ import { ref, onMounted } from 'vue';
 import axios from "axios";
 import { useRouter } from 'vue-router';
 
+// Ottieni il router per la navigazione programmatica
 const router = useRouter();
 
-
+// Definisci le variabili reattive per i dati
 const storedDataList = ref([]);
 const prezziDataList = ref([]);
 const scadenza = ref('');
 
-
+// Questa funzione viene eseguita quando il componente è montato
 onMounted(() => {
   // Recupera i dati salvati nel localStorage
   const storedData = localStorage.getItem('paymentData');
   const prezzi = localStorage.getItem('prezzi');
+
+  // Log dei dati recuperati per il debug
   console.log('Raw stored data:', storedData);
-  console.log('Raw stored data:', prezzi);
+  console.log('Raw prezzi data:', prezzi);
+
   if (storedData) {
     try {
+      // Parsing dei dati dal localStorage
       const parsedData = JSON.parse(storedData);
       const parsedPrezzi = JSON.parse(prezzi);
+
+      // Assegna i dati alle variabili reattive
       storedDataList.value = parsedData.posti || []; // Accedi alla proprietà "posti"
       prezziDataList.value = parsedPrezzi || [];
+
+      // Log dei dati parsati per il debug
       console.log('Parsed stored data:', storedDataList.value);
     } catch (error) {
+      // Gestione degli errori nel parsing dei dati
       console.error('Error parsing stored data:', error);
     }
   }
+  // Log dei dati ricevuti per il debug
   console.log('Dati ricevuti:', storedDataList.value);
 });
 
-
+// Funzione chiamata al momento del submit del form
 const vaiAlPagamento = async (event: Event) => {
-
-
-  event.preventDefault(); // Previene il comportamento predefinito del pulsante
-
+  // Previene il comportamento predefinito del pulsante submit
+  event.preventDefault();
 
   // Controllo della data di scadenza
   const today = new Date();
+  // Crea una data con il giorno impostato al primo del mese per il confronto
   const scadenzaData = new Date(scadenza.value + '-01'); // Formatta come YYYY-MM-01
+
   if (scadenzaData < today) {
+    // Mostra un messaggio di errore se la carta è scaduta
     alert('La carta di credito risulta scaduta.');
     return; // Interrompe l'esecuzione se la data è scaduta
   }
 
   try {
+    // Invia i dati al server
     const response = await axios.post('http://localhost:8080/ticket/Pagamento', {
       biglietti: storedDataList.value,
       utente: '1',
       evento: 'E0001'
     });
 
+    // Log della risposta del server
     console.log(response.data);
+    // Reindirizza l'utente alla pagina di pagamento effettuato
     router.push({ name: 'PagamentoEffettuato' });
   } catch (error) {
+    // Gestione degli errori nella richiesta
     console.error('Error sending data:', error);
   }
 };

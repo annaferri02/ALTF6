@@ -72,17 +72,38 @@ public class TemplateRestConsumer {
     // Metodo per ottenere l'ID dell'organizzatore (mockato per il momento)
     public static String getIdOrg(String resourceName, String uriBase, boolean useMock) {
         RestClient restClient = RestClient.create();
+        ObjectMapper objectMapper = new ObjectMapper();
+        String idorg = null;
+
         if (useMock) {
             uriBase = uriBaseMock;
         }
 
+        String fullUri = uriBase + resourceName;
+
         System.out.println("Request URI: " + uriBase + resourceName);
 
-        return restClient.get()
-                .uri(uriBase + resourceName)
-                .retrieve()
-                .body(String.class);
+        try {
+            // Recupera la risposta come stringa JSON
+            String jsonResponse = restClient.get()
+                    .uri(fullUri)
+                    .retrieve()
+                    .body(String.class);
 
+            // Usa ObjectMapper per leggere il JSON
+            JsonNode rootNode = objectMapper.readTree(jsonResponse);
+
+            // Itera attraverso i valori del JSON
+            Iterator<JsonNode> elements = rootNode.elements();
+            idorg = elements.next().asText();
+
+            System.out.println("Prices retrieved: " + idorg);
+        } catch (Exception e) {
+            System.err.println("Error while processing JSON: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return idorg;
     }
 
     // Metodo per ottenere un evento simulato

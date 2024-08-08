@@ -32,7 +32,7 @@ public class MainController {
     @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
     @GetMapping("/getEventiOrganizzatore")
     public List<String> getEventiOrganizzatore() {
-        String ID_Organizzatore = TemplateRestConsumer.getIdOrg("organizzatore", null, true);
+        String ID_Organizzatore = TemplateRestConsumer.getIdOrg("getOrg", null, true);
         return myService.getEventiOrganizzatore(ID_Organizzatore);
     }
 

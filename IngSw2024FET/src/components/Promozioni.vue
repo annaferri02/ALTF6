@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
+//metodo per navigare alla pagina delle promozioni
 const goToPromotion = (promoPage: string) => {
   router.push({ path: promoPage });
 };
@@ -39,25 +40,25 @@ const goToPromotion = (promoPage: string) => {
       <div class="container">
         <div class="promo_banner" @click="goToPromotion('Promo1')">
           <h3>Rimetti in rilievo</h3>
-          <img src="@/assets/primo.gif">
+          <img src="@/assets/1.gif">
           <p style="font-style: italic">Riposiziona l’evento in prima pagina, come appena pubblicato.</p>
           <p><strong>A PARTIRE DA 0,80€</strong></p>
         </div>
         <div class="promo_banner" @click="goToPromotion('Promo2')">
           <h3>Metti in esposizione</h3>
-          <img src="@/assets/secondo.gif">
+          <img src="@/assets/2.gif">
           <p style="font-style: italic">Etichetta l’evento come in “Esposizione”, facendolo apparire tra i primi risultati della ricerca.</p>
           <p><strong>A PARTIRE DA 0,50€</strong></p>
         </div>
         <div class="promo_banner" @click="goToPromotion('Promo3')">
           <h3>Pungente</h3>
-          <img src="@/assets/terzo.gif">
+          <img src="@/assets/3.gif">
           <p style="font-style: italic">Etichetta l’evento come “Pungente” e attira più partecipazioni.</p>
           <p><strong>A PARTIRE DA 0,65€</strong></p>
         </div>
         <div class="promo_banner" @click="goToPromotion('Promo4')">
           <h3>Promo 2 x 1</h3>
-          <img src="@/assets/quarto.gif">
+          <img src="@/assets/4.gif">
           <p style="font-style: italic">Combina le opzioni in rilievo e in esposizione ad un prezzo vantaggioso.</p>
           <p><strong>A PARTIRE DA 1,20€</strong></p>
         </div>

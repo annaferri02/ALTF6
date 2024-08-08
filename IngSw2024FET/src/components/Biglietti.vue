@@ -1,41 +1,40 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import { ref, onMounted } from 'vue'; // Importa funzioni Vue per reattività e montaggio del componente
+import axios from 'axios'; // Importa axios per effettuare richieste HTTP
+import { useRouter } from 'vue-router'; // Importa useRouter per gestire la navigazione
 
-import { useRouter } from 'vue-router';
+const router = useRouter(); // Ottiene l'istanza del router per la navigazione
 
-const router = useRouter();
+// Definisci le variabili reattive per gestire lo stato del componente
+const count = ref(0); // Numero di biglietti aggiuntivi da acquistare
+const biglietti = ref([]); // Lista dei biglietti (posti occupati)
+const prezzi = ref([]); // Lista dei prezzi per le diverse categorie di posti
+const evento = ref({}); // Dettagli dell'evento
+const luogo = ref({}); // Dettagli del luogo dell'evento
+const opzioniMenu = ref([]); // Opzioni del menu per la selezione dei posti
+const tribune = ref([]); // Tipi di tribune disponibili
+const postiOccupati = ref([]); // Posti occupati (ID dei biglietti)
+const selezioneTribuna = ref(''); // Categoria di posti selezionata
+const mostraPiantina = ref(false); // Flag per mostrare o meno la piantina
+const postiSelezionati = ref([]); // Lista dei posti selezionati dall'utente
 
-// Definisci le variabili reattive
-const count = ref(0);
-const biglietti = ref([]);
-const prezzi = ref([]);
-const evento = ref({});
-const luogo = ref({});
-const opzioniMenu = ref([]);
-const tribune = ref([]);
-const postiOccupati = ref([]);
-const selezioneTribuna = ref('');
-const mostraPiantina = ref(false);
-const postiSelezionati = ref([]);
-
-// Funzione per recuperare i dati
+// Funzione per recuperare i dati dal server
 const fetchData = async () => {
   try {
+    // Effettua una richiesta GET per ottenere le informazioni sui biglietti
     const response = await axios.get('http://localhost:8080/ticket/getInfoBiglietti');
     const data = response.data;
 
-    // Aggiorna gli stati
+    // Aggiorna gli stati con i dati ricevuti
     biglietti.value = data.biglietti;  // Supponiamo che biglietti contenga gli ID dei posti occupati
     evento.value = data.evento;
     luogo.value = data.luogo;
     postiOccupati.value = data.biglietti;  // Usa biglietti come posti occupati
     prezzi.value = data.prezzi;
 
-
     console.log('Dati ricevuti:', data.luogo);
 
-    // Estrai le opzioni del menù
+    // Estrai le opzioni del menù in base alla tipologia del luogo
     if (luogo.value.Tipologia === 'Indoor') {
       opzioniMenu.value = ['Parterre', 'Parterre VIP'];
       mostraPiantina.value = true;
@@ -46,16 +45,20 @@ const fetchData = async () => {
       mostraPiantina.value = false;
     }
   } catch (error) {
+    // Gestisce eventuali errori durante il recupero dei dati
     console.error('Error fetching data:', error);
   }
 };
 
+// Esegui fetchData quando il componente viene montato
 onMounted(fetchData);
 
+// Configura il numero di righe e posti per fila per le tribune
 const rows = 6;
 const seatsPerRowStandard = 9; // Numero di posti per fila nelle tribune laterali
 const seatsPerRowTribuna = Math.floor(seatsPerRowStandard * 2.5); // Numero di posti per fila nella tribuna centrale (1.5x)
 
+// Funzione per creare la disposizione dei posti in base alla sezione
 const createSeats = (sectionId) => {
   const seats = [];
   let startId;
@@ -80,20 +83,23 @@ const createSeats = (sectionId) => {
       seatsPerRow = seatsPerRowStandard; // Usa la configurazione predefinita
   }
 
+  // Crea la disposizione dei posti
   for (let i = 0; i < rows; i++) {
     const row = [];
     for (let j = 0; j < seatsPerRow; j++) {
       const seatId = startId++;
       row.push({
         id: seatId,
-        occupied: postiOccupatiNumerici.includes(seatId) , // Supponiamo che biglietti contenga gli ID dei posti occupati
-        selected: postiSelezionati.value.includes(seatId)});
+        occupied: postiOccupatiNumerici.includes(seatId), // Verifica se il posto è occupato
+        selected: postiSelezionati.value.includes(seatId) // Verifica se il posto è selezionato
+      });
     }
     seats.push(row);
   }
   return seats;
 }
 
+// Funzioni per gestire il numero di biglietti aggiuntivi
 function increment() {
   if (count.value < 6) {
     count.value++;
@@ -106,19 +112,19 @@ function decrement() {
   }
 }
 
-// Funzione che seleziona i posti e se sono invece già occupati li segna in un altro colore
+// Funzione per gestire la selezione dei posti
 function toggleSeatSelection(seat) {
   if (seat.occupied) {
-    alert("Il posto è già occupato!");
+    alert("Il posto è già occupato!"); // Mostra un messaggio se il posto è già occupato
     return;
   }
-  seat.selected = !seat.selected;
+  seat.selected = !seat.selected; // Alterna la selezione del posto
   if (seat.selected) {
-    postiSelezionati.value.push(seat.id);
+    postiSelezionati.value.push(seat.id); // Aggiunge il posto selezionato alla lista
   } else {
     const index = postiSelezionati.value.indexOf(seat.id);
     if (index > -1) {
-      postiSelezionati.value.splice(index, 1);
+      postiSelezionati.value.splice(index, 1); // Rimuove il posto dalla lista se deselezionato
     }
   }
   console.log('Posto selezionato:', seat.id, 'Selezionato:', seat.selected);
@@ -126,8 +132,7 @@ function toggleSeatSelection(seat) {
   console.log('Posti Occupati:', postiOccupati.value);
 }
 
-
-
+// Funzione per ottenere lo stile CSS della tribuna
 const getTribunaStyle = (tribuna) => {
   switch (tribuna) {
     case 'tribuna-sx':
@@ -141,33 +146,35 @@ const getTribunaStyle = (tribuna) => {
   }
 };
 
+// Funzione per gestire la navigazione al pagamento
 const vaiAlPagamento = async () => {
   try {
-
     const numSelezionati = postiSelezionati.value.length + count.value;
 
     if (numSelezionati === 0) {
-      alert('Seleziona almeno un posto!');
+      alert('Seleziona almeno un posto!'); // Mostra un messaggio se nessun posto è selezionato
       return;
     } else if (numSelezionati > 6) {
-      alert('Seleziona al massimo 6 posti!');
+      alert('Seleziona al massimo 6 posti!'); // Mostra un messaggio se il numero di posti supera il massimo consentito
       return;
     } else if (count.value > 0 && selezioneTribuna.value === '') {
-      alert('Seleziona una categoria di posti!');
+      alert('Seleziona una categoria di posti!'); // Mostra un messaggio se una categoria di posti non è selezionata
       return;
     }
 
+    // Invia i dati al server per la procedura di pagamento
     const response = await axios.post('http://localhost:8080/ticket/gotoPagamento', {
       tribuna: selezioneTribuna.value,
       postiSelezionati: postiSelezionati.value,
       count: count.value,
     });
     console.log(response.data);
-    localStorage.setItem('paymentData', JSON.stringify(response.data));
-    localStorage.setItem('prezzi', JSON.stringify(prezzi.value));
-    router.push({ name: 'Pagamento' });
+    localStorage.setItem('paymentData', JSON.stringify(response.data)); // Salva i dati di pagamento nel localStorage
+    localStorage.setItem('prezzi', JSON.stringify(prezzi.value)); // Salva i prezzi nel localStorage
+    router.push({ name: 'Pagamento' }); // Naviga alla pagina di pagamento
 
   } catch (error) {
+    // Gestisce eventuali errori nella richiesta di pagamento
     console.error('Error sending data:', error);
   }
 };
@@ -257,8 +264,8 @@ const vaiAlPagamento = async () => {
         <h3 class="centrato">Seleziona i posti in Pit e Pit Gold mostrati nella piantina, dal men&ugrave; sottostante</h3>
         <div class="tariffe">
           <option>Tariffe</option>
-          <option>Pit 50 &euro;</option>
-          <option>Pit GOLD 100 &euro;</option>
+          <option>PIT {{ prezzi[0] }} &euro;</option>
+          <option>PIT GOLD {{ prezzi[1] }} &euro;</option>
         </div>
         <section class="piantina1">
           <table id="palco1">
