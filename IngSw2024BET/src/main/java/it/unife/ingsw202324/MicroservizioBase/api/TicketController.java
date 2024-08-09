@@ -26,17 +26,6 @@ public class TicketController {
     @Autowired
     ServiceTransazioni transazioniService;
 
-    /*@RequestMapping("/costobiglietti")  Annotation per definire il path del metodo (relativo alla classe)
-    public List<Biglietto> testMysql() {
-        return ticketService.getAll();
-    }
-
-    @RequestMapping("/testWithElements") /* Annotation per definire il path del metodo (relativo alla classe)
-    public String addElement() {
-        /* Chiamata a un servizio che ritorna inserisce dati e ritorna il db
-        return ticketService.addElement(this.callRest()).toString();
-    }*/
-
 
   @CrossOrigin(origins = "http://localhost:5173") // Aggiungi questa linea
   @GetMapping("/getInfoBiglietti")
@@ -124,6 +113,7 @@ public class TicketController {
 
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Biglietti salvati con successo");
+            response.put("esitoPAGAMENTO", "OK");
             response.put("biglietti", bigliettiSalvati);
 
             // Invio della risposta come JSON
@@ -131,7 +121,7 @@ public class TicketController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Errore durante il salvataggio dei biglietti", "error", e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("", "Errore durante il salvataggio dei biglietti", "error", e.getMessage(), "esitoPAGAMENTO", "KO"));
         }
     }
 

@@ -142,7 +142,8 @@ public class MainController {
         try {
             sponsorizzazioneService.insert(sponsorizzazione);
             Map<String, Object> response = new HashMap<>();
-            response.put("message", "Sponsorizzazione salvata con successo");
+            response.put("esitoPAGAMENTO", "OK");
+            response.put("TIPO PROMO", sponsorizzazione.getTipologia());
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             System.err.println("Errore durante l'elaborazione della richiesta: " + e.getMessage());
